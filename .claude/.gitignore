@@ -1,0 +1,23 @@
+# Cache and temporary files
+cache/
+debug/
+file-history/
+paste-cache/
+shell-snapshots/
+statsig/
+todos/
+
+# Session logs and history
+sessions/
+history.jsonl
+stats-cache.json
+projects/-Users-*/
+
+# Settings (may contain sensitive data)
+settings.json
+
+# Plugins (managed separately)
+plugins/
+
+# Plan files (temporary)
+plans/
