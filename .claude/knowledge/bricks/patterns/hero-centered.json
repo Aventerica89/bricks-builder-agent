@@ -1,0 +1,231 @@
+{
+  "content": [
+    {
+      "id": "hro001",
+      "name": "section",
+      "parent": 0,
+      "children": ["hco001"],
+      "settings": {
+        "_padding": {
+          "top": "var(--section-space-xl)",
+          "bottom": "var(--section-space-xl)"
+        },
+        "_padding:tablet_portrait": {
+          "top": "var(--section-space-l)",
+          "bottom": "var(--section-space-l)"
+        },
+        "_padding:mobile_portrait": {
+          "top": "var(--section-space-m)",
+          "bottom": "var(--section-space-m)"
+        },
+        "_background": {
+          "image": {
+            "url": "https://medsparanker.com/wp-content/uploads/hero-bg.jpg",
+            "size": "cover",
+            "position": "center center"
+          }
+        },
+        "_gradient": {
+          "angle": "180",
+          "colors": [
+            {
+              "id": "hg001",
+              "color": { "raw": "var(--base-trans-80)" },
+              "stop": "0"
+            },
+            {
+              "id": "hg002",
+              "color": { "raw": "var(--base-trans-60)" },
+              "stop": "100"
+            }
+          ]
+        },
+        "_minHeight": "80vh"
+      },
+      "label": "Hero"
+    },
+    {
+      "id": "hco001",
+      "name": "container",
+      "parent": "hro001",
+      "children": ["het001", "heh001", "hes001", "heb001"],
+      "settings": {
+        "_widthMax": "900",
+        "_display": "flex",
+        "_direction": "column",
+        "_alignItems": "center",
+        "_justifyContent": "center",
+        "_rowGap": "var(--space-m)",
+        "_height": "100%",
+        "_textAlign": "center"
+      }
+    },
+    {
+      "id": "het001",
+      "name": "text-basic",
+      "parent": "hco001",
+      "children": [],
+      "settings": {
+        "text": "Welcome to Our Platform",
+        "_cssGlobalClasses": ["jbh001"]
+      },
+      "label": "Eyebrow"
+    },
+    {
+      "id": "heh001",
+      "name": "heading",
+      "parent": "hco001",
+      "children": [],
+      "settings": {
+        "text": "Transform Your Business with Our Solution",
+        "tag": "h1",
+        "_cssGlobalClasses": ["jbh002"]
+      }
+    },
+    {
+      "id": "hes001",
+      "name": "text-basic",
+      "parent": "hco001",
+      "children": [],
+      "settings": {
+        "text": "Discover how our innovative approach helps businesses grow faster and achieve their goals with proven strategies.",
+        "_cssGlobalClasses": ["jbh003"]
+      },
+      "label": "Subtitle"
+    },
+    {
+      "id": "heb001",
+      "name": "div",
+      "parent": "hco001",
+      "children": ["hb1001", "hb2001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_direction:mobile_portrait": "column",
+        "_columnGap": "var(--space-m)",
+        "_rowGap": "var(--space-s)",
+        "_marginTop": "var(--space-m)"
+      },
+      "label": "Button Group"
+    },
+    {
+      "id": "hb1001",
+      "name": "button",
+      "parent": "heb001",
+      "children": [],
+      "settings": {
+        "text": "Get Started",
+        "link": { "type": "external", "url": "/contact" },
+        "_cssGlobalClasses": ["jbh004"]
+      }
+    },
+    {
+      "id": "hb2001",
+      "name": "button",
+      "parent": "heb001",
+      "children": [],
+      "settings": {
+        "text": "Learn More",
+        "link": { "type": "external", "url": "/about" },
+        "_cssGlobalClasses": ["jbh005"]
+      }
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://medsparanker.com",
+  "version": "2.1.4",
+  "globalClasses": [
+    {
+      "id": "jbh001",
+      "name": "jb-hero__eyebrow",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "600",
+          "text-transform": "uppercase",
+          "letter-spacing": "2px",
+          "color": { "raw": "var(--primary)" }
+        }
+      }
+    },
+    {
+      "id": "jbh002",
+      "name": "jb-hero__title",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--h1)",
+          "font-weight": "700",
+          "line-height": "1.1",
+          "color": { "raw": "var(--white)" }
+        },
+        "_typography:tablet_portrait": {
+          "font-size": "var(--h2)"
+        },
+        "_typography:mobile_portrait": {
+          "font-size": "var(--h3)"
+        },
+        "_widthMax": "18ch"
+      }
+    },
+    {
+      "id": "jbh003",
+      "name": "jb-hero__subtitle",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-l)",
+          "line-height": "1.6",
+          "color": { "raw": "var(--neutral)" }
+        },
+        "_typography:mobile_portrait": {
+          "font-size": "var(--text-m)"
+        },
+        "_widthMax": "60ch"
+      }
+    },
+    {
+      "id": "jbh004",
+      "name": "jb-hero__cta",
+      "settings": {
+        "_background": { "color": { "raw": "var(--primary)" } },
+        "_typography": {
+          "color": { "raw": "var(--white)" },
+          "font-weight": "600"
+        },
+        "_padding": {
+          "top": "var(--space-s)",
+          "right": "var(--space-xl)",
+          "bottom": "var(--space-s)",
+          "left": "var(--space-xl)"
+        },
+        "_border": {
+          "radius": { "top": "var(--radius)", "right": "var(--radius)", "bottom": "var(--radius)", "left": "var(--radius)" }
+        },
+        "_cssCustom": ".jb-hero__cta:hover {\n  background-color: var(--primary-dark);\n  transform: translateY(-2px);\n}"
+      }
+    },
+    {
+      "id": "jbh005",
+      "name": "jb-hero__cta--secondary",
+      "settings": {
+        "_background": { "color": { "raw": "transparent" } },
+        "_typography": {
+          "color": { "raw": "var(--white)" },
+          "font-weight": "600"
+        },
+        "_padding": {
+          "top": "var(--space-s)",
+          "right": "var(--space-xl)",
+          "bottom": "var(--space-s)",
+          "left": "var(--space-xl)"
+        },
+        "_border": {
+          "width": { "top": "2px", "right": "2px", "bottom": "2px", "left": "2px" },
+          "style": "solid",
+          "color": { "raw": "var(--white)" },
+          "radius": { "top": "var(--radius)", "right": "var(--radius)", "bottom": "var(--radius)", "left": "var(--radius)" }
+        },
+        "_cssCustom": ".jb-hero__cta--secondary:hover {\n  background-color: var(--white);\n  color: var(--base);\n}"
+      }
+    }
+  ]
+}

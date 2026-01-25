@@ -1,0 +1,209 @@
+{
+  "content": [
+    {
+      "id": "hdr001",
+      "name": "section",
+      "parent": 0,
+      "children": ["hdc001"],
+      "settings": {
+        "_padding": {
+          "top": "var(--space-m)",
+          "bottom": "var(--space-m)"
+        },
+        "_background": {
+          "color": { "raw": "var(--white)" }
+        },
+        "_position": "sticky",
+        "_top": "0",
+        "_zIndex": "100",
+        "_boxShadow": {
+          "offsetX": "0",
+          "offsetY": "2px",
+          "blur": "10px",
+          "color": { "raw": "var(--base-trans-10)" }
+        }
+      },
+      "label": "Header"
+    },
+    {
+      "id": "hdc001",
+      "name": "container",
+      "parent": "hdr001",
+      "children": ["hdl001", "hdn001", "hdb001", "hdm001"],
+      "settings": {
+        "_widthMax": "1360",
+        "_display": "flex",
+        "_direction": "row",
+        "_justifyContent": "space-between",
+        "_alignItems": "center"
+      }
+    },
+    {
+      "id": "hdl001",
+      "name": "image",
+      "parent": "hdc001",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "https://medsparanker.com/wp-content/uploads/logo.svg",
+          "size": "full"
+        },
+        "link": { "type": "internal", "url": "/" },
+        "_height": "40px",
+        "_height:mobile_portrait": "32px",
+        "_width": "auto"
+      },
+      "label": "Logo"
+    },
+    {
+      "id": "hdn001",
+      "name": "div",
+      "parent": "hdc001",
+      "children": ["hnv001", "hnv002", "hnv003", "hnv004", "hnv005"],
+      "settings": {
+        "_display": "flex",
+        "_display:mobile_portrait": "none",
+        "_direction": "row",
+        "_columnGap": "var(--space-l)",
+        "_alignItems": "center"
+      },
+      "label": "Nav Links"
+    },
+    {
+      "id": "hnv001",
+      "name": "text-basic",
+      "parent": "hdn001",
+      "children": [],
+      "settings": {
+        "text": "Services",
+        "link": { "type": "external", "url": "/services" },
+        "_cssGlobalClasses": ["jbh001"]
+      }
+    },
+    {
+      "id": "hnv002",
+      "name": "text-basic",
+      "parent": "hdn001",
+      "children": [],
+      "settings": {
+        "text": "About",
+        "link": { "type": "external", "url": "/about" },
+        "_cssGlobalClasses": ["jbh001"]
+      }
+    },
+    {
+      "id": "hnv003",
+      "name": "text-basic",
+      "parent": "hdn001",
+      "children": [],
+      "settings": {
+        "text": "Pricing",
+        "link": { "type": "external", "url": "/pricing" },
+        "_cssGlobalClasses": ["jbh001"]
+      }
+    },
+    {
+      "id": "hnv004",
+      "name": "text-basic",
+      "parent": "hdn001",
+      "children": [],
+      "settings": {
+        "text": "Blog",
+        "link": { "type": "external", "url": "/blog" },
+        "_cssGlobalClasses": ["jbh001"]
+      }
+    },
+    {
+      "id": "hnv005",
+      "name": "text-basic",
+      "parent": "hdn001",
+      "children": [],
+      "settings": {
+        "text": "Contact",
+        "link": { "type": "external", "url": "/contact" },
+        "_cssGlobalClasses": ["jbh001"]
+      }
+    },
+    {
+      "id": "hdb001",
+      "name": "button",
+      "parent": "hdc001",
+      "children": [],
+      "settings": {
+        "text": "Get Started",
+        "link": { "type": "external", "url": "/signup" },
+        "_cssGlobalClasses": ["jbh002"],
+        "_display:mobile_portrait": "none"
+      },
+      "label": "CTA"
+    },
+    {
+      "id": "hdm001",
+      "name": "div",
+      "parent": "hdc001",
+      "children": ["hmi001"],
+      "settings": {
+        "_display": "none",
+        "_display:mobile_portrait": "flex",
+        "_cursor": "pointer",
+        "_padding": {
+          "top": "var(--space-xs)",
+          "right": "var(--space-xs)",
+          "bottom": "var(--space-xs)",
+          "left": "var(--space-xs)"
+        }
+      },
+      "label": "Mobile Menu Toggle"
+    },
+    {
+      "id": "hmi001",
+      "name": "icon",
+      "parent": "hdm001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-bars" },
+        "iconSize": "24",
+        "iconColor": { "raw": "var(--base)" }
+      }
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://medsparanker.com",
+  "version": "2.1.4",
+  "globalClasses": [
+    {
+      "id": "jbh001",
+      "name": "jb-header__link",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "500",
+          "color": { "raw": "var(--base)" }
+        },
+        "_cssCustom": ".jb-header__link {\n  transition: color 0.2s ease;\n}\n\n.jb-header__link:hover {\n  color: var(--primary);\n}"
+      }
+    },
+    {
+      "id": "jbh002",
+      "name": "jb-header__cta",
+      "settings": {
+        "_background": { "color": { "raw": "var(--primary)" } },
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "600",
+          "color": { "raw": "var(--white)" }
+        },
+        "_padding": {
+          "top": "var(--space-xs)",
+          "right": "var(--space-m)",
+          "bottom": "var(--space-xs)",
+          "left": "var(--space-m)"
+        },
+        "_border": {
+          "radius": { "top": "var(--radius)", "right": "var(--radius)", "bottom": "var(--radius)", "left": "var(--radius)" }
+        },
+        "_cssCustom": ".jb-header__cta {\n  transition: background-color 0.2s ease;\n}\n\n.jb-header__cta:hover {\n  background-color: var(--primary-dark);\n}"
+      }
+    }
+  ]
+}

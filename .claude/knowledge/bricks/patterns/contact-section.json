@@ -1,0 +1,402 @@
+{
+  "content": [
+    {
+      "id": "cts001",
+      "name": "section",
+      "parent": 0,
+      "children": ["ctc001"],
+      "settings": {
+        "_padding": {
+          "top": "var(--section-space-l)",
+          "bottom": "var(--section-space-l)"
+        },
+        "_background": {
+          "color": { "raw": "var(--base)" }
+        }
+      },
+      "label": "Contact Section"
+    },
+    {
+      "id": "ctc001",
+      "name": "container",
+      "parent": "cts001",
+      "children": ["ctg001"],
+      "settings": {
+        "_widthMax": "1360",
+        "_display": "grid",
+        "_gridTemplateColumns": "1fr 1fr",
+        "_gridTemplateColumns:tablet_portrait": "1fr",
+        "_gridGap": "var(--space-xl)",
+        "_alignItems": "center"
+      }
+    },
+    {
+      "id": "ctg001",
+      "name": "block",
+      "parent": "ctc001",
+      "children": ["cth001", "ctd001", "cti001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-l)"
+      },
+      "label": "Contact Info"
+    },
+    {
+      "id": "cth001",
+      "name": "div",
+      "parent": "ctg001",
+      "children": ["cte001", "ctt001", "cts002"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-s)"
+      },
+      "label": "Header"
+    },
+    {
+      "id": "cte001",
+      "name": "text-basic",
+      "parent": "cth001",
+      "children": [],
+      "settings": {
+        "text": "Get in Touch",
+        "_cssGlobalClasses": ["jbct01"]
+      },
+      "label": "Eyebrow"
+    },
+    {
+      "id": "ctt001",
+      "name": "heading",
+      "parent": "cth001",
+      "children": [],
+      "settings": {
+        "text": "Let's Start a Conversation",
+        "tag": "h2",
+        "_cssGlobalClasses": ["jbct02"]
+      }
+    },
+    {
+      "id": "cts002",
+      "name": "text-basic",
+      "parent": "cth001",
+      "children": [],
+      "settings": {
+        "text": "Have a question or want to learn more? We'd love to hear from you.",
+        "_cssGlobalClasses": ["jbct03"]
+      }
+    },
+    {
+      "id": "ctd001",
+      "name": "div",
+      "parent": "ctg001",
+      "children": ["ctd002", "ctd003", "ctd004"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-m)"
+      },
+      "label": "Contact Details"
+    },
+    {
+      "id": "ctd002",
+      "name": "div",
+      "parent": "ctd001",
+      "children": ["cdi001", "cdt001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbct04"]
+      },
+      "label": "Email"
+    },
+    {
+      "id": "cdi001",
+      "name": "icon",
+      "parent": "ctd002",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-envelope" },
+        "iconSize": "20",
+        "iconColor": { "raw": "var(--primary)" }
+      }
+    },
+    {
+      "id": "cdt001",
+      "name": "div",
+      "parent": "ctd002",
+      "children": ["cdl001", "cdv001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "2px"
+      }
+    },
+    {
+      "id": "cdl001",
+      "name": "text-basic",
+      "parent": "cdt001",
+      "children": [],
+      "settings": {
+        "text": "Email",
+        "_cssGlobalClasses": ["jbct05"]
+      }
+    },
+    {
+      "id": "cdv001",
+      "name": "text-basic",
+      "parent": "cdt001",
+      "children": [],
+      "settings": {
+        "text": "hello@example.com",
+        "link": { "type": "external", "url": "mailto:hello@example.com" },
+        "_cssGlobalClasses": ["jbct06"]
+      }
+    },
+    {
+      "id": "ctd003",
+      "name": "div",
+      "parent": "ctd001",
+      "children": ["cdi002", "cdt002"],
+      "settings": {
+        "_cssGlobalClasses": ["jbct04"]
+      },
+      "label": "Phone"
+    },
+    {
+      "id": "cdi002",
+      "name": "icon",
+      "parent": "ctd003",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-phone" },
+        "iconSize": "20",
+        "iconColor": { "raw": "var(--primary)" }
+      }
+    },
+    {
+      "id": "cdt002",
+      "name": "div",
+      "parent": "ctd003",
+      "children": ["cdl002", "cdv002"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "2px"
+      }
+    },
+    {
+      "id": "cdl002",
+      "name": "text-basic",
+      "parent": "cdt002",
+      "children": [],
+      "settings": {
+        "text": "Phone",
+        "_cssGlobalClasses": ["jbct05"]
+      }
+    },
+    {
+      "id": "cdv002",
+      "name": "text-basic",
+      "parent": "cdt002",
+      "children": [],
+      "settings": {
+        "text": "(555) 123-4567",
+        "link": { "type": "external", "url": "tel:+15551234567" },
+        "_cssGlobalClasses": ["jbct06"]
+      }
+    },
+    {
+      "id": "ctd004",
+      "name": "div",
+      "parent": "ctd001",
+      "children": ["cdi003", "cdt003"],
+      "settings": {
+        "_cssGlobalClasses": ["jbct04"]
+      },
+      "label": "Address"
+    },
+    {
+      "id": "cdi003",
+      "name": "icon",
+      "parent": "ctd004",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-map-marker-alt" },
+        "iconSize": "20",
+        "iconColor": { "raw": "var(--primary)" }
+      }
+    },
+    {
+      "id": "cdt003",
+      "name": "div",
+      "parent": "ctd004",
+      "children": ["cdl003", "cdv003"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "2px"
+      }
+    },
+    {
+      "id": "cdl003",
+      "name": "text-basic",
+      "parent": "cdt003",
+      "children": [],
+      "settings": {
+        "text": "Address",
+        "_cssGlobalClasses": ["jbct05"]
+      }
+    },
+    {
+      "id": "cdv003",
+      "name": "text-basic",
+      "parent": "cdt003",
+      "children": [],
+      "settings": {
+        "text": "123 Business Ave, Suite 100, City, ST 12345",
+        "_cssGlobalClasses": ["jbct06"]
+      }
+    },
+    {
+      "id": "cti001",
+      "name": "div",
+      "parent": "ctg001",
+      "children": ["csi001", "csi002", "csi003", "csi004"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_columnGap": "var(--space-m)"
+      },
+      "label": "Social Icons"
+    },
+    {
+      "id": "csi001",
+      "name": "icon",
+      "parent": "cti001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fab fa-facebook-f" },
+        "iconSize": "18",
+        "link": { "type": "external", "url": "https://facebook.com" },
+        "_cssGlobalClasses": ["jbct07"]
+      }
+    },
+    {
+      "id": "csi002",
+      "name": "icon",
+      "parent": "cti001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fab fa-instagram" },
+        "iconSize": "18",
+        "link": { "type": "external", "url": "https://instagram.com" },
+        "_cssGlobalClasses": ["jbct07"]
+      }
+    },
+    {
+      "id": "csi003",
+      "name": "icon",
+      "parent": "cti001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fab fa-linkedin-in" },
+        "iconSize": "18",
+        "link": { "type": "external", "url": "https://linkedin.com" },
+        "_cssGlobalClasses": ["jbct07"]
+      }
+    },
+    {
+      "id": "csi004",
+      "name": "icon",
+      "parent": "cti001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fab fa-x-twitter" },
+        "iconSize": "18",
+        "link": { "type": "external", "url": "https://twitter.com" },
+        "_cssGlobalClasses": ["jbct07"]
+      }
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://medsparanker.com",
+  "version": "2.1.4",
+  "globalClasses": [
+    {
+      "id": "jbct01",
+      "name": "jb-contact__eyebrow",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "600",
+          "text-transform": "uppercase",
+          "letter-spacing": "2px",
+          "color": { "raw": "var(--primary)" }
+        }
+      }
+    },
+    {
+      "id": "jbct02",
+      "name": "jb-contact__title",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--h2)",
+          "font-weight": "700",
+          "color": { "raw": "var(--white)" }
+        }
+      }
+    },
+    {
+      "id": "jbct03",
+      "name": "jb-contact__description",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "line-height": "1.6",
+          "color": { "raw": "var(--neutral)" }
+        }
+      }
+    },
+    {
+      "id": "jbct04",
+      "name": "jb-contact__item",
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_columnGap": "var(--space-m)",
+        "_alignItems": "flex-start"
+      }
+    },
+    {
+      "id": "jbct05",
+      "name": "jb-contact__label",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-xs)",
+          "font-weight": "500",
+          "text-transform": "uppercase",
+          "letter-spacing": "1px",
+          "color": { "raw": "var(--neutral)" }
+        }
+      }
+    },
+    {
+      "id": "jbct06",
+      "name": "jb-contact__value",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "color": { "raw": "var(--white)" }
+        },
+        "_cssCustom": ".jb-contact__value:hover {\n  color: var(--primary);\n}"
+      }
+    },
+    {
+      "id": "jbct07",
+      "name": "jb-contact__social",
+      "settings": {
+        "iconColor": { "raw": "var(--neutral)" },
+        "_cssCustom": ".jb-contact__social {\n  transition: color 0.2s ease;\n}\n\n.jb-contact__social:hover {\n  color: var(--primary);\n}"
+      }
+    }
+  ]
+}

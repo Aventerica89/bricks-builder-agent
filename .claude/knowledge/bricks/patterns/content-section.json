@@ -1,0 +1,313 @@
+{
+  "content": [
+    {
+      "id": "cnt001",
+      "name": "section",
+      "parent": 0,
+      "children": ["cnc001"],
+      "settings": {
+        "_padding": {
+          "top": "var(--section-space-l)",
+          "bottom": "var(--section-space-l)"
+        },
+        "_background": {
+          "color": { "raw": "var(--white)" }
+        }
+      },
+      "label": "Content Section"
+    },
+    {
+      "id": "cnc001",
+      "name": "container",
+      "parent": "cnt001",
+      "children": ["cnb001", "cnb002"],
+      "settings": {
+        "_widthMax": "1360",
+        "_display": "grid",
+        "_gridTemplateColumns": "1fr 1fr",
+        "_gridTemplateColumns:tablet_portrait": "1fr",
+        "_gridGap": "var(--space-xl)",
+        "_alignItems": "center"
+      }
+    },
+    {
+      "id": "cnb001",
+      "name": "block",
+      "parent": "cnc001",
+      "children": ["cne001", "cnh001", "cnd001", "cnl001", "cnb003"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-m)",
+        "_alignItems": "flex-start"
+      },
+      "label": "Content"
+    },
+    {
+      "id": "cne001",
+      "name": "text-basic",
+      "parent": "cnb001",
+      "children": [],
+      "settings": {
+        "text": "About Us",
+        "_cssGlobalClasses": ["jbcn01"]
+      },
+      "label": "Eyebrow"
+    },
+    {
+      "id": "cnh001",
+      "name": "heading",
+      "parent": "cnb001",
+      "children": [],
+      "settings": {
+        "text": "We Help Businesses Achieve Their Full Potential",
+        "tag": "h2",
+        "_cssGlobalClasses": ["jbcn02"]
+      }
+    },
+    {
+      "id": "cnd001",
+      "name": "rich-text",
+      "parent": "cnb001",
+      "children": [],
+      "settings": {
+        "text": "<p>With over a decade of experience, we've helped hundreds of businesses transform their operations and achieve remarkable growth.</p>\n<p>Our team of experts combines industry knowledge with innovative strategies to deliver results that exceed expectations. We believe in building lasting partnerships with our clients.</p>",
+        "_cssGlobalClasses": ["jbcn03"]
+      }
+    },
+    {
+      "id": "cnl001",
+      "name": "div",
+      "parent": "cnb001",
+      "children": ["cli001", "cli002", "cli003"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-s)"
+      },
+      "label": "List"
+    },
+    {
+      "id": "cli001",
+      "name": "div",
+      "parent": "cnl001",
+      "children": ["lic001", "lit001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbcn04"]
+      },
+      "label": "List Item"
+    },
+    {
+      "id": "lic001",
+      "name": "icon",
+      "parent": "cli001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-check-circle" },
+        "iconSize": "20",
+        "iconColor": { "raw": "var(--primary)" }
+      }
+    },
+    {
+      "id": "lit001",
+      "name": "text-basic",
+      "parent": "cli001",
+      "children": [],
+      "settings": {
+        "text": "Industry-leading expertise and experience",
+        "_cssGlobalClasses": ["jbcn05"]
+      }
+    },
+    {
+      "id": "cli002",
+      "name": "div",
+      "parent": "cnl001",
+      "children": ["lic002", "lit002"],
+      "settings": {
+        "_cssGlobalClasses": ["jbcn04"]
+      },
+      "label": "List Item"
+    },
+    {
+      "id": "lic002",
+      "name": "icon",
+      "parent": "cli002",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-check-circle" },
+        "iconSize": "20",
+        "iconColor": { "raw": "var(--primary)" }
+      }
+    },
+    {
+      "id": "lit002",
+      "name": "text-basic",
+      "parent": "cli002",
+      "children": [],
+      "settings": {
+        "text": "Proven track record of success",
+        "_cssGlobalClasses": ["jbcn05"]
+      }
+    },
+    {
+      "id": "cli003",
+      "name": "div",
+      "parent": "cnl001",
+      "children": ["lic003", "lit003"],
+      "settings": {
+        "_cssGlobalClasses": ["jbcn04"]
+      },
+      "label": "List Item"
+    },
+    {
+      "id": "lic003",
+      "name": "icon",
+      "parent": "cli003",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-check-circle" },
+        "iconSize": "20",
+        "iconColor": { "raw": "var(--primary)" }
+      }
+    },
+    {
+      "id": "lit003",
+      "name": "text-basic",
+      "parent": "cli003",
+      "children": [],
+      "settings": {
+        "text": "Dedicated support and partnership",
+        "_cssGlobalClasses": ["jbcn05"]
+      }
+    },
+    {
+      "id": "cnb003",
+      "name": "button",
+      "parent": "cnb001",
+      "children": [],
+      "settings": {
+        "text": "Learn More About Us",
+        "link": { "type": "external", "url": "/about" },
+        "_cssGlobalClasses": ["jbcn06"],
+        "_marginTop": "var(--space-s)"
+      }
+    },
+    {
+      "id": "cnb002",
+      "name": "block",
+      "parent": "cnc001",
+      "children": ["cni001"],
+      "settings": {
+        "_order:tablet_portrait": "-1"
+      },
+      "label": "Image"
+    },
+    {
+      "id": "cni001",
+      "name": "image",
+      "parent": "cnb002",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "https://medsparanker.com/wp-content/uploads/about-image.jpg",
+          "size": "large"
+        },
+        "_width": "100%",
+        "_height": "auto",
+        "_border": {
+          "radius": { "top": "var(--radius-l)", "right": "var(--radius-l)", "bottom": "var(--radius-l)", "left": "var(--radius-l)" }
+        },
+        "_boxShadow": {
+          "offsetX": "0",
+          "offsetY": "20px",
+          "blur": "60px",
+          "color": { "raw": "var(--base-trans-15)" }
+        }
+      }
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://medsparanker.com",
+  "version": "2.1.4",
+  "globalClasses": [
+    {
+      "id": "jbcn01",
+      "name": "jb-content__eyebrow",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "600",
+          "text-transform": "uppercase",
+          "letter-spacing": "2px",
+          "color": { "raw": "var(--primary)" }
+        }
+      }
+    },
+    {
+      "id": "jbcn02",
+      "name": "jb-content__title",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--h2)",
+          "font-weight": "700",
+          "line-height": "1.2",
+          "color": { "raw": "var(--base)" }
+        },
+        "_widthMax": "20ch"
+      }
+    },
+    {
+      "id": "jbcn03",
+      "name": "jb-content__text",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "line-height": "1.7",
+          "color": { "raw": "var(--base-light)" }
+        },
+        "_cssCustom": ".jb-content__text p {\n  margin-bottom: var(--space-s);\n}\n\n.jb-content__text p:last-child {\n  margin-bottom: 0;\n}"
+      }
+    },
+    {
+      "id": "jbcn04",
+      "name": "jb-content__list-item",
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_columnGap": "var(--space-s)",
+        "_alignItems": "center"
+      }
+    },
+    {
+      "id": "jbcn05",
+      "name": "jb-content__list-text",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "color": { "raw": "var(--base)" }
+        }
+      }
+    },
+    {
+      "id": "jbcn06",
+      "name": "jb-content__cta",
+      "settings": {
+        "_background": { "color": { "raw": "var(--primary)" } },
+        "_typography": {
+          "color": { "raw": "var(--white)" },
+          "font-weight": "600"
+        },
+        "_padding": {
+          "top": "var(--space-s)",
+          "right": "var(--space-l)",
+          "bottom": "var(--space-s)",
+          "left": "var(--space-l)"
+        },
+        "_border": {
+          "radius": { "top": "var(--radius)", "right": "var(--radius)", "bottom": "var(--radius)", "left": "var(--radius)" }
+        },
+        "_cssCustom": ".jb-content__cta:hover {\n  background-color: var(--primary-dark);\n}"
+      }
+    }
+  ]
+}

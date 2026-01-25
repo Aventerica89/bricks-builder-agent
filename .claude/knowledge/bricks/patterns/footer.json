@@ -1,0 +1,463 @@
+{
+  "content": [
+    {
+      "id": "ftr001",
+      "name": "section",
+      "parent": 0,
+      "children": ["ftc001", "ftb001"],
+      "settings": {
+        "_padding": {
+          "top": "var(--section-space-l)",
+          "bottom": "var(--space-l)"
+        },
+        "_background": {
+          "color": { "raw": "var(--base)" }
+        }
+      },
+      "label": "Footer"
+    },
+    {
+      "id": "ftc001",
+      "name": "container",
+      "parent": "ftr001",
+      "children": ["ftg001"],
+      "settings": {
+        "_widthMax": "1360",
+        "_marginBottom": "var(--space-xl)"
+      }
+    },
+    {
+      "id": "ftg001",
+      "name": "block",
+      "parent": "ftc001",
+      "children": ["fc1001", "fc2001", "fc3001", "fc4001"],
+      "settings": {
+        "_display": "grid",
+        "_gridTemplateColumns": "2fr 1fr 1fr 1fr",
+        "_gridTemplateColumns:tablet_portrait": "1fr 1fr",
+        "_gridTemplateColumns:mobile_portrait": "1fr",
+        "_gridGap": "var(--space-xl)",
+        "_gridRowGap:tablet_portrait": "var(--space-xl)"
+      },
+      "label": "Footer Grid"
+    },
+    {
+      "id": "fc1001",
+      "name": "div",
+      "parent": "ftg001",
+      "children": ["fl1001", "fd1001", "fs1001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-m)"
+      },
+      "label": "Brand Column"
+    },
+    {
+      "id": "fl1001",
+      "name": "image",
+      "parent": "fc1001",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "https://medsparanker.com/wp-content/uploads/logo-white.svg",
+          "size": "full"
+        },
+        "_height": "40px",
+        "_width": "auto"
+      },
+      "label": "Logo"
+    },
+    {
+      "id": "fd1001",
+      "name": "text-basic",
+      "parent": "fc1001",
+      "children": [],
+      "settings": {
+        "text": "Helping businesses grow with innovative solutions since 2020. We're committed to delivering exceptional results for our clients.",
+        "_cssGlobalClasses": ["jbft01"]
+      }
+    },
+    {
+      "id": "fs1001",
+      "name": "div",
+      "parent": "fc1001",
+      "children": ["fsi001", "fsi002", "fsi003", "fsi004"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_columnGap": "var(--space-s)"
+      },
+      "label": "Social"
+    },
+    {
+      "id": "fsi001",
+      "name": "icon",
+      "parent": "fs1001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fab fa-facebook-f" },
+        "iconSize": "16",
+        "link": { "type": "external", "url": "https://facebook.com" },
+        "_cssGlobalClasses": ["jbft02"]
+      }
+    },
+    {
+      "id": "fsi002",
+      "name": "icon",
+      "parent": "fs1001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fab fa-instagram" },
+        "iconSize": "16",
+        "link": { "type": "external", "url": "https://instagram.com" },
+        "_cssGlobalClasses": ["jbft02"]
+      }
+    },
+    {
+      "id": "fsi003",
+      "name": "icon",
+      "parent": "fs1001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fab fa-linkedin-in" },
+        "iconSize": "16",
+        "link": { "type": "external", "url": "https://linkedin.com" },
+        "_cssGlobalClasses": ["jbft02"]
+      }
+    },
+    {
+      "id": "fsi004",
+      "name": "icon",
+      "parent": "fs1001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fab fa-x-twitter" },
+        "iconSize": "16",
+        "link": { "type": "external", "url": "https://twitter.com" },
+        "_cssGlobalClasses": ["jbft02"]
+      }
+    },
+    {
+      "id": "fc2001",
+      "name": "div",
+      "parent": "ftg001",
+      "children": ["fh2001", "fn2001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-m)"
+      },
+      "label": "Company"
+    },
+    {
+      "id": "fh2001",
+      "name": "heading",
+      "parent": "fc2001",
+      "children": [],
+      "settings": {
+        "text": "Company",
+        "tag": "h4",
+        "_cssGlobalClasses": ["jbft03"]
+      }
+    },
+    {
+      "id": "fn2001",
+      "name": "div",
+      "parent": "fc2001",
+      "children": ["fnl001", "fnl002", "fnl003", "fnl004"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-s)"
+      },
+      "label": "Links"
+    },
+    {
+      "id": "fnl001",
+      "name": "text-basic",
+      "parent": "fn2001",
+      "children": [],
+      "settings": {
+        "text": "About Us",
+        "link": { "type": "external", "url": "/about" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "fnl002",
+      "name": "text-basic",
+      "parent": "fn2001",
+      "children": [],
+      "settings": {
+        "text": "Careers",
+        "link": { "type": "external", "url": "/careers" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "fnl003",
+      "name": "text-basic",
+      "parent": "fn2001",
+      "children": [],
+      "settings": {
+        "text": "Blog",
+        "link": { "type": "external", "url": "/blog" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "fnl004",
+      "name": "text-basic",
+      "parent": "fn2001",
+      "children": [],
+      "settings": {
+        "text": "Press",
+        "link": { "type": "external", "url": "/press" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "fc3001",
+      "name": "div",
+      "parent": "ftg001",
+      "children": ["fh3001", "fn3001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-m)"
+      },
+      "label": "Services"
+    },
+    {
+      "id": "fh3001",
+      "name": "heading",
+      "parent": "fc3001",
+      "children": [],
+      "settings": {
+        "text": "Services",
+        "tag": "h4",
+        "_cssGlobalClasses": ["jbft03"]
+      }
+    },
+    {
+      "id": "fn3001",
+      "name": "div",
+      "parent": "fc3001",
+      "children": ["fnl005", "fnl006", "fnl007", "fnl008"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-s)"
+      },
+      "label": "Links"
+    },
+    {
+      "id": "fnl005",
+      "name": "text-basic",
+      "parent": "fn3001",
+      "children": [],
+      "settings": {
+        "text": "Consulting",
+        "link": { "type": "external", "url": "/consulting" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "fnl006",
+      "name": "text-basic",
+      "parent": "fn3001",
+      "children": [],
+      "settings": {
+        "text": "Development",
+        "link": { "type": "external", "url": "/development" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "fnl007",
+      "name": "text-basic",
+      "parent": "fn3001",
+      "children": [],
+      "settings": {
+        "text": "Marketing",
+        "link": { "type": "external", "url": "/marketing" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "fnl008",
+      "name": "text-basic",
+      "parent": "fn3001",
+      "children": [],
+      "settings": {
+        "text": "Support",
+        "link": { "type": "external", "url": "/support" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "fc4001",
+      "name": "div",
+      "parent": "ftg001",
+      "children": ["fh4001", "fn4001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-m)"
+      },
+      "label": "Legal"
+    },
+    {
+      "id": "fh4001",
+      "name": "heading",
+      "parent": "fc4001",
+      "children": [],
+      "settings": {
+        "text": "Legal",
+        "tag": "h4",
+        "_cssGlobalClasses": ["jbft03"]
+      }
+    },
+    {
+      "id": "fn4001",
+      "name": "div",
+      "parent": "fc4001",
+      "children": ["fnl009", "fnl010", "fnl011"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-s)"
+      },
+      "label": "Links"
+    },
+    {
+      "id": "fnl009",
+      "name": "text-basic",
+      "parent": "fn4001",
+      "children": [],
+      "settings": {
+        "text": "Privacy Policy",
+        "link": { "type": "external", "url": "/privacy" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "fnl010",
+      "name": "text-basic",
+      "parent": "fn4001",
+      "children": [],
+      "settings": {
+        "text": "Terms of Service",
+        "link": { "type": "external", "url": "/terms" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "fnl011",
+      "name": "text-basic",
+      "parent": "fn4001",
+      "children": [],
+      "settings": {
+        "text": "Cookie Policy",
+        "link": { "type": "external", "url": "/cookies" },
+        "_cssGlobalClasses": ["jbft04"]
+      }
+    },
+    {
+      "id": "ftb001",
+      "name": "container",
+      "parent": "ftr001",
+      "children": ["fbt001"],
+      "settings": {
+        "_widthMax": "1360",
+        "_borderTop": {
+          "width": { "top": "1px" },
+          "style": "solid",
+          "color": { "raw": "var(--base-light)" }
+        },
+        "_paddingTop": "var(--space-l)"
+      },
+      "label": "Bottom Bar"
+    },
+    {
+      "id": "fbt001",
+      "name": "text-basic",
+      "parent": "ftb001",
+      "children": [],
+      "settings": {
+        "text": "© 2025 Company Name. All rights reserved.",
+        "_cssGlobalClasses": ["jbft05"]
+      }
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://medsparanker.com",
+  "version": "2.1.4",
+  "globalClasses": [
+    {
+      "id": "jbft01",
+      "name": "jb-footer__description",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "line-height": "1.7",
+          "color": { "raw": "var(--neutral)" }
+        },
+        "_widthMax": "35ch"
+      }
+    },
+    {
+      "id": "jbft02",
+      "name": "jb-footer__social",
+      "settings": {
+        "iconColor": { "raw": "var(--neutral)" },
+        "_width": "36px",
+        "_height": "36px",
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_background": { "color": { "raw": "var(--base-light)" } },
+        "_border": {
+          "radius": { "top": "50%", "right": "50%", "bottom": "50%", "left": "50%" }
+        },
+        "_cssCustom": ".jb-footer__social {\n  transition: background-color 0.2s ease;\n}\n\n.jb-footer__social:hover {\n  background-color: var(--primary);\n}"
+      }
+    },
+    {
+      "id": "jbft03",
+      "name": "jb-footer__heading",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "600",
+          "text-transform": "uppercase",
+          "letter-spacing": "1px",
+          "color": { "raw": "var(--white)" }
+        }
+      }
+    },
+    {
+      "id": "jbft04",
+      "name": "jb-footer__link",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "color": { "raw": "var(--neutral)" }
+        },
+        "_cssCustom": ".jb-footer__link {\n  transition: color 0.2s ease;\n}\n\n.jb-footer__link:hover {\n  color: var(--white);\n}"
+      }
+    },
+    {
+      "id": "jbft05",
+      "name": "jb-footer__copyright",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-xs)",
+          "color": { "raw": "var(--neutral)" },
+          "text-align": "center"
+        }
+      }
+    }
+  ]
+}

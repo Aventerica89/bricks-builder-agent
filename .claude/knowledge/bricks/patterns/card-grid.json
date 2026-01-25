@@ -1,0 +1,377 @@
+{
+  "content": [
+    {
+      "id": "cgs001",
+      "name": "section",
+      "parent": 0,
+      "children": ["cgc001"],
+      "settings": {
+        "_padding": {
+          "top": "var(--section-space-l)",
+          "bottom": "var(--section-space-l)"
+        },
+        "_background": {
+          "color": { "raw": "var(--neutral-ultra-light)" }
+        }
+      },
+      "label": "Card Grid Section"
+    },
+    {
+      "id": "cgc001",
+      "name": "container",
+      "parent": "cgs001",
+      "children": ["cgh001", "cgp001", "cgg001"],
+      "settings": {
+        "_widthMax": "1360",
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-xl)"
+      }
+    },
+    {
+      "id": "cgh001",
+      "name": "div",
+      "parent": "cgc001",
+      "children": ["cgt001", "cgd001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_alignItems": "center",
+        "_rowGap": "var(--space-s)",
+        "_textAlign": "center"
+      },
+      "label": "Header"
+    },
+    {
+      "id": "cgt001",
+      "name": "heading",
+      "parent": "cgh001",
+      "children": [],
+      "settings": {
+        "text": "Our Services",
+        "tag": "h2",
+        "_cssGlobalClasses": ["jbc001"]
+      }
+    },
+    {
+      "id": "cgd001",
+      "name": "text-basic",
+      "parent": "cgh001",
+      "children": [],
+      "settings": {
+        "text": "Comprehensive solutions tailored to your needs",
+        "_cssGlobalClasses": ["jbc002"]
+      }
+    },
+    {
+      "id": "cgg001",
+      "name": "block",
+      "parent": "cgc001",
+      "children": ["cgr001", "cgr002", "cgr003"],
+      "settings": {
+        "_display": "grid",
+        "_gridTemplateColumns": "repeat(3, 1fr)",
+        "_gridTemplateColumns:tablet_portrait": "repeat(2, 1fr)",
+        "_gridTemplateColumns:mobile_portrait": "1fr",
+        "_gridGap": "var(--grid-gap)"
+      },
+      "label": "Grid"
+    },
+    {
+      "id": "cgr001",
+      "name": "div",
+      "parent": "cgg001",
+      "children": ["ci1001", "ch1001", "ct1001", "cl1001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbc003"]
+      },
+      "label": "Card 1"
+    },
+    {
+      "id": "ci1001",
+      "name": "div",
+      "parent": "cgr001",
+      "children": ["cic001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbc004"]
+      },
+      "label": "Icon Wrap"
+    },
+    {
+      "id": "cic001",
+      "name": "icon",
+      "parent": "ci1001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-chart-line" },
+        "iconSize": "24",
+        "iconColor": { "raw": "var(--primary)" }
+      }
+    },
+    {
+      "id": "ch1001",
+      "name": "heading",
+      "parent": "cgr001",
+      "children": [],
+      "settings": {
+        "text": "Analytics",
+        "tag": "h3",
+        "_cssGlobalClasses": ["jbc005"]
+      }
+    },
+    {
+      "id": "ct1001",
+      "name": "text-basic",
+      "parent": "cgr001",
+      "children": [],
+      "settings": {
+        "text": "Track and analyze your performance with comprehensive reporting tools.",
+        "_cssGlobalClasses": ["jbc006"]
+      }
+    },
+    {
+      "id": "cl1001",
+      "name": "text-basic",
+      "parent": "cgr001",
+      "children": [],
+      "settings": {
+        "text": "Learn more →",
+        "link": { "type": "external", "url": "/analytics" },
+        "_cssGlobalClasses": ["jbc007"]
+      },
+      "label": "Link"
+    },
+    {
+      "id": "cgr002",
+      "name": "div",
+      "parent": "cgg001",
+      "children": ["ci2001", "ch2001", "ct2001", "cl2001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbc003"]
+      },
+      "label": "Card 2"
+    },
+    {
+      "id": "ci2001",
+      "name": "div",
+      "parent": "cgr002",
+      "children": ["cic002"],
+      "settings": {
+        "_cssGlobalClasses": ["jbc004"]
+      },
+      "label": "Icon Wrap"
+    },
+    {
+      "id": "cic002",
+      "name": "icon",
+      "parent": "ci2001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-users" },
+        "iconSize": "24",
+        "iconColor": { "raw": "var(--primary)" }
+      }
+    },
+    {
+      "id": "ch2001",
+      "name": "heading",
+      "parent": "cgr002",
+      "children": [],
+      "settings": {
+        "text": "Team Management",
+        "tag": "h3",
+        "_cssGlobalClasses": ["jbc005"]
+      }
+    },
+    {
+      "id": "ct2001",
+      "name": "text-basic",
+      "parent": "cgr002",
+      "children": [],
+      "settings": {
+        "text": "Collaborate effectively with your team using our powerful management tools.",
+        "_cssGlobalClasses": ["jbc006"]
+      }
+    },
+    {
+      "id": "cl2001",
+      "name": "text-basic",
+      "parent": "cgr002",
+      "children": [],
+      "settings": {
+        "text": "Learn more →",
+        "link": { "type": "external", "url": "/team" },
+        "_cssGlobalClasses": ["jbc007"]
+      },
+      "label": "Link"
+    },
+    {
+      "id": "cgr003",
+      "name": "div",
+      "parent": "cgg001",
+      "children": ["ci3001", "ch3001", "ct3001", "cl3001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbc003"]
+      },
+      "label": "Card 3"
+    },
+    {
+      "id": "ci3001",
+      "name": "div",
+      "parent": "cgr003",
+      "children": ["cic003"],
+      "settings": {
+        "_cssGlobalClasses": ["jbc004"]
+      },
+      "label": "Icon Wrap"
+    },
+    {
+      "id": "cic003",
+      "name": "icon",
+      "parent": "ci3001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-shield-alt" },
+        "iconSize": "24",
+        "iconColor": { "raw": "var(--primary)" }
+      }
+    },
+    {
+      "id": "ch3001",
+      "name": "heading",
+      "parent": "cgr003",
+      "children": [],
+      "settings": {
+        "text": "Security",
+        "tag": "h3",
+        "_cssGlobalClasses": ["jbc005"]
+      }
+    },
+    {
+      "id": "ct3001",
+      "name": "text-basic",
+      "parent": "cgr003",
+      "children": [],
+      "settings": {
+        "text": "Enterprise-grade security to keep your data safe and protected.",
+        "_cssGlobalClasses": ["jbc006"]
+      }
+    },
+    {
+      "id": "cl3001",
+      "name": "text-basic",
+      "parent": "cgr003",
+      "children": [],
+      "settings": {
+        "text": "Learn more →",
+        "link": { "type": "external", "url": "/security" },
+        "_cssGlobalClasses": ["jbc007"]
+      },
+      "label": "Link"
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://medsparanker.com",
+  "version": "2.1.4",
+  "globalClasses": [
+    {
+      "id": "jbc001",
+      "name": "jb-cards__title",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--h2)",
+          "font-weight": "700",
+          "color": { "raw": "var(--base)" }
+        }
+      }
+    },
+    {
+      "id": "jbc002",
+      "name": "jb-cards__subtitle",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-l)",
+          "color": { "raw": "var(--base-light)" }
+        },
+        "_widthMax": "50ch"
+      }
+    },
+    {
+      "id": "jbc003",
+      "name": "jb-card",
+      "settings": {
+        "_background": { "color": { "raw": "var(--white)" } },
+        "_padding": {
+          "top": "var(--space-l)",
+          "right": "var(--space-l)",
+          "bottom": "var(--space-l)",
+          "left": "var(--space-l)"
+        },
+        "_border": {
+          "radius": { "top": "var(--radius)", "right": "var(--radius)", "bottom": "var(--radius)", "left": "var(--radius)" }
+        },
+        "_boxShadow": {
+          "offsetX": "0",
+          "offsetY": "4px",
+          "blur": "20px",
+          "color": { "raw": "var(--base-trans-10)" }
+        },
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-s)",
+        "_cssCustom": ".jb-card {\n  transition: transform 0.3s ease, box-shadow 0.3s ease;\n}\n\n.jb-card:hover {\n  transform: translateY(-5px);\n  box-shadow: 0 12px 40px var(--base-trans-15);\n}"
+      }
+    },
+    {
+      "id": "jbc004",
+      "name": "jb-card__icon-wrap",
+      "settings": {
+        "_width": "56px",
+        "_height": "56px",
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_background": { "color": { "raw": "var(--primary-ultra-light)" } },
+        "_border": {
+          "radius": { "top": "var(--radius)", "right": "var(--radius)", "bottom": "var(--radius)", "left": "var(--radius)" }
+        },
+        "_marginBottom": "var(--space-xs)"
+      }
+    },
+    {
+      "id": "jbc005",
+      "name": "jb-card__title",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--h4)",
+          "font-weight": "600",
+          "color": { "raw": "var(--base)" }
+        }
+      }
+    },
+    {
+      "id": "jbc006",
+      "name": "jb-card__description",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "line-height": "1.6",
+          "color": { "raw": "var(--base-light)" }
+        }
+      }
+    },
+    {
+      "id": "jbc007",
+      "name": "jb-card__link",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "600",
+          "color": { "raw": "var(--primary)" }
+        },
+        "_marginTop": "auto",
+        "_cssCustom": ".jb-card__link:hover {\n  color: var(--primary-dark);\n}"
+      }
+    }
+  ]
+}

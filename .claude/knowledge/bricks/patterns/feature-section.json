@@ -1,0 +1,495 @@
+{
+  "content": [
+    {
+      "id": "fts001",
+      "name": "section",
+      "parent": 0,
+      "children": ["ftc001"],
+      "settings": {
+        "_padding": {
+          "top": "var(--section-space-l)",
+          "bottom": "var(--section-space-l)"
+        },
+        "_background": {
+          "color": { "raw": "var(--white)" }
+        }
+      },
+      "label": "Features"
+    },
+    {
+      "id": "ftc001",
+      "name": "container",
+      "parent": "fts001",
+      "children": ["fth001", "ftg001"],
+      "settings": {
+        "_widthMax": "1360",
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-xl)"
+      }
+    },
+    {
+      "id": "fth001",
+      "name": "div",
+      "parent": "ftc001",
+      "children": ["fte001", "ftt001", "ftd001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_alignItems": "center",
+        "_rowGap": "var(--space-s)",
+        "_textAlign": "center",
+        "_widthMax": "700px",
+        "_margin": { "left": "auto", "right": "auto" }
+      },
+      "label": "Header"
+    },
+    {
+      "id": "fte001",
+      "name": "text-basic",
+      "parent": "fth001",
+      "children": [],
+      "settings": {
+        "text": "Why Choose Us",
+        "_cssGlobalClasses": ["jbf001"]
+      },
+      "label": "Eyebrow"
+    },
+    {
+      "id": "ftt001",
+      "name": "heading",
+      "parent": "fth001",
+      "children": [],
+      "settings": {
+        "text": "Features That Set Us Apart",
+        "tag": "h2",
+        "_cssGlobalClasses": ["jbf002"]
+      }
+    },
+    {
+      "id": "ftd001",
+      "name": "text-basic",
+      "parent": "fth001",
+      "children": [],
+      "settings": {
+        "text": "Discover the powerful features that help our clients achieve exceptional results.",
+        "_cssGlobalClasses": ["jbf003"]
+      }
+    },
+    {
+      "id": "ftg001",
+      "name": "block",
+      "parent": "ftc001",
+      "children": ["fti001", "fti002", "fti003", "fti004", "fti005", "fti006"],
+      "settings": {
+        "_display": "grid",
+        "_gridTemplateColumns": "repeat(3, 1fr)",
+        "_gridTemplateColumns:tablet_portrait": "repeat(2, 1fr)",
+        "_gridTemplateColumns:mobile_portrait": "1fr",
+        "_gridGap": "var(--space-l)",
+        "_gridRowGap": "var(--space-xl)"
+      },
+      "label": "Features Grid"
+    },
+    {
+      "id": "fti001",
+      "name": "div",
+      "parent": "ftg001",
+      "children": ["fi1001", "fh1001", "fd1001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf004"]
+      },
+      "label": "Feature 1"
+    },
+    {
+      "id": "fi1001",
+      "name": "div",
+      "parent": "fti001",
+      "children": ["fic001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf005"]
+      },
+      "label": "Icon"
+    },
+    {
+      "id": "fic001",
+      "name": "icon",
+      "parent": "fi1001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-bolt" },
+        "iconSize": "24",
+        "iconColor": { "raw": "var(--white)" }
+      }
+    },
+    {
+      "id": "fh1001",
+      "name": "heading",
+      "parent": "fti001",
+      "children": [],
+      "settings": {
+        "text": "Lightning Fast",
+        "tag": "h3",
+        "_cssGlobalClasses": ["jbf006"]
+      }
+    },
+    {
+      "id": "fd1001",
+      "name": "text-basic",
+      "parent": "fti001",
+      "children": [],
+      "settings": {
+        "text": "Experience blazing fast performance with our optimized infrastructure.",
+        "_cssGlobalClasses": ["jbf007"]
+      }
+    },
+    {
+      "id": "fti002",
+      "name": "div",
+      "parent": "ftg001",
+      "children": ["fi2001", "fh2001", "fd2001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf004"]
+      },
+      "label": "Feature 2"
+    },
+    {
+      "id": "fi2001",
+      "name": "div",
+      "parent": "fti002",
+      "children": ["fic002"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf005"]
+      },
+      "label": "Icon"
+    },
+    {
+      "id": "fic002",
+      "name": "icon",
+      "parent": "fi2001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-shield-alt" },
+        "iconSize": "24",
+        "iconColor": { "raw": "var(--white)" }
+      }
+    },
+    {
+      "id": "fh2001",
+      "name": "heading",
+      "parent": "fti002",
+      "children": [],
+      "settings": {
+        "text": "Bank-Level Security",
+        "tag": "h3",
+        "_cssGlobalClasses": ["jbf006"]
+      }
+    },
+    {
+      "id": "fd2001",
+      "name": "text-basic",
+      "parent": "fti002",
+      "children": [],
+      "settings": {
+        "text": "Your data is protected with enterprise-grade encryption and security protocols.",
+        "_cssGlobalClasses": ["jbf007"]
+      }
+    },
+    {
+      "id": "fti003",
+      "name": "div",
+      "parent": "ftg001",
+      "children": ["fi3001", "fh3001", "fd3001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf004"]
+      },
+      "label": "Feature 3"
+    },
+    {
+      "id": "fi3001",
+      "name": "div",
+      "parent": "fti003",
+      "children": ["fic003"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf005"]
+      },
+      "label": "Icon"
+    },
+    {
+      "id": "fic003",
+      "name": "icon",
+      "parent": "fi3001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-sync" },
+        "iconSize": "24",
+        "iconColor": { "raw": "var(--white)" }
+      }
+    },
+    {
+      "id": "fh3001",
+      "name": "heading",
+      "parent": "fti003",
+      "children": [],
+      "settings": {
+        "text": "Real-Time Sync",
+        "tag": "h3",
+        "_cssGlobalClasses": ["jbf006"]
+      }
+    },
+    {
+      "id": "fd3001",
+      "name": "text-basic",
+      "parent": "fti003",
+      "children": [],
+      "settings": {
+        "text": "Keep your data synchronized across all devices instantly.",
+        "_cssGlobalClasses": ["jbf007"]
+      }
+    },
+    {
+      "id": "fti004",
+      "name": "div",
+      "parent": "ftg001",
+      "children": ["fi4001", "fh4001", "fd4001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf004"]
+      },
+      "label": "Feature 4"
+    },
+    {
+      "id": "fi4001",
+      "name": "div",
+      "parent": "fti004",
+      "children": ["fic004"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf005"]
+      },
+      "label": "Icon"
+    },
+    {
+      "id": "fic004",
+      "name": "icon",
+      "parent": "fi4001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-chart-pie" },
+        "iconSize": "24",
+        "iconColor": { "raw": "var(--white)" }
+      }
+    },
+    {
+      "id": "fh4001",
+      "name": "heading",
+      "parent": "fti004",
+      "children": [],
+      "settings": {
+        "text": "Advanced Analytics",
+        "tag": "h3",
+        "_cssGlobalClasses": ["jbf006"]
+      }
+    },
+    {
+      "id": "fd4001",
+      "name": "text-basic",
+      "parent": "fti004",
+      "children": [],
+      "settings": {
+        "text": "Get actionable insights with comprehensive reporting and analytics.",
+        "_cssGlobalClasses": ["jbf007"]
+      }
+    },
+    {
+      "id": "fti005",
+      "name": "div",
+      "parent": "ftg001",
+      "children": ["fi5001", "fh5001", "fd5001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf004"]
+      },
+      "label": "Feature 5"
+    },
+    {
+      "id": "fi5001",
+      "name": "div",
+      "parent": "fti005",
+      "children": ["fic005"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf005"]
+      },
+      "label": "Icon"
+    },
+    {
+      "id": "fic005",
+      "name": "icon",
+      "parent": "fi5001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-headset" },
+        "iconSize": "24",
+        "iconColor": { "raw": "var(--white)" }
+      }
+    },
+    {
+      "id": "fh5001",
+      "name": "heading",
+      "parent": "fti005",
+      "children": [],
+      "settings": {
+        "text": "24/7 Support",
+        "tag": "h3",
+        "_cssGlobalClasses": ["jbf006"]
+      }
+    },
+    {
+      "id": "fd5001",
+      "name": "text-basic",
+      "parent": "fti005",
+      "children": [],
+      "settings": {
+        "text": "Our dedicated support team is available around the clock to help you.",
+        "_cssGlobalClasses": ["jbf007"]
+      }
+    },
+    {
+      "id": "fti006",
+      "name": "div",
+      "parent": "ftg001",
+      "children": ["fi6001", "fh6001", "fd6001"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf004"]
+      },
+      "label": "Feature 6"
+    },
+    {
+      "id": "fi6001",
+      "name": "div",
+      "parent": "fti006",
+      "children": ["fic006"],
+      "settings": {
+        "_cssGlobalClasses": ["jbf005"]
+      },
+      "label": "Icon"
+    },
+    {
+      "id": "fic006",
+      "name": "icon",
+      "parent": "fi6001",
+      "children": [],
+      "settings": {
+        "icon": { "library": "fontawesome", "icon": "fas fa-plug" },
+        "iconSize": "24",
+        "iconColor": { "raw": "var(--white)" }
+      }
+    },
+    {
+      "id": "fh6001",
+      "name": "heading",
+      "parent": "fti006",
+      "children": [],
+      "settings": {
+        "text": "Easy Integration",
+        "tag": "h3",
+        "_cssGlobalClasses": ["jbf006"]
+      }
+    },
+    {
+      "id": "fd6001",
+      "name": "text-basic",
+      "parent": "fti006",
+      "children": [],
+      "settings": {
+        "text": "Connect with your favorite tools and services seamlessly.",
+        "_cssGlobalClasses": ["jbf007"]
+      }
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://medsparanker.com",
+  "version": "2.1.4",
+  "globalClasses": [
+    {
+      "id": "jbf001",
+      "name": "jb-features__eyebrow",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "600",
+          "text-transform": "uppercase",
+          "letter-spacing": "2px",
+          "color": { "raw": "var(--primary)" }
+        }
+      }
+    },
+    {
+      "id": "jbf002",
+      "name": "jb-features__title",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--h2)",
+          "font-weight": "700",
+          "color": { "raw": "var(--base)" }
+        }
+      }
+    },
+    {
+      "id": "jbf003",
+      "name": "jb-features__description",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-l)",
+          "line-height": "1.6",
+          "color": { "raw": "var(--base-light)" }
+        }
+      }
+    },
+    {
+      "id": "jbf004",
+      "name": "jb-feature",
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-s)",
+        "_alignItems": "flex-start"
+      }
+    },
+    {
+      "id": "jbf005",
+      "name": "jb-feature__icon",
+      "settings": {
+        "_width": "56px",
+        "_height": "56px",
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_background": { "color": { "raw": "var(--primary)" } },
+        "_border": {
+          "radius": { "top": "var(--radius)", "right": "var(--radius)", "bottom": "var(--radius)", "left": "var(--radius)" }
+        },
+        "_marginBottom": "var(--space-xs)"
+      }
+    },
+    {
+      "id": "jbf006",
+      "name": "jb-feature__title",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--h4)",
+          "font-weight": "600",
+          "color": { "raw": "var(--base)" }
+        }
+      }
+    },
+    {
+      "id": "jbf007",
+      "name": "jb-feature__text",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "line-height": "1.6",
+          "color": { "raw": "var(--base-light)" }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,454 @@
+{
+  "content": [
+    {
+      "id": "sec001",
+      "name": "section",
+      "parent": 0,
+      "children": ["wrp001"],
+      "settings": {
+        "_cssGlobalClasses": ["breakout--full", "jb-gallery"],
+        "_padding": {
+          "top": "0",
+          "right": "0",
+          "bottom": "0",
+          "left": "0"
+        },
+        "_background": {
+          "color": {
+            "raw": "var(--white)"
+          }
+        }
+      },
+      "label": "Gallery Header"
+    },
+    {
+      "id": "wrp001",
+      "name": "div",
+      "parent": "sec001",
+      "children": ["col001", "col002"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_width": "100%",
+        "_alignItems": "stretch",
+        "_direction:tablet_portrait": "column"
+      },
+      "label": "Full Width Wrapper"
+    },
+    {
+      "id": "col001",
+      "name": "div",
+      "parent": "wrp001",
+      "children": ["grd001"],
+      "settings": {
+        "_width": "60%",
+        "_flexShrink": "0",
+        "_width:tablet_portrait": "100%",
+        "_background": {
+          "color": {
+            "raw": "var(--base)"
+          }
+        }
+      },
+      "label": "Collage Column"
+    },
+    {
+      "id": "grd001",
+      "name": "div",
+      "parent": "col001",
+      "children": ["cel001", "cel002", "cel003", "cel004"],
+      "settings": {
+        "_display": "grid",
+        "_gridTemplateColumns": "1fr 1fr",
+        "_gridTemplateRows": "1fr 1fr 1fr",
+        "_gap": "var(--space-xs)",
+        "_height": "100%",
+        "_minHeight": "600px",
+        "_padding": {
+          "top": "var(--space-xs)",
+          "right": "var(--space-xs)",
+          "bottom": "var(--space-xs)",
+          "left": "var(--space-xs)"
+        },
+        "_cssGlobalClasses": ["jb-gallery__grid"],
+        "_cssCustom": "#brxe-grd001 > *:nth-child(1) {\n  grid-row: 1 / 3;\n}\n\n#brxe-grd001 > *:nth-child(4) {\n  grid-row: 2 / 4;\n}"
+      },
+      "label": "Photo Grid"
+    },
+    {
+      "id": "cel001",
+      "name": "div",
+      "parent": "grd001",
+      "children": ["img001"],
+      "settings": {
+        "_overflow": "hidden",
+        "_cssGlobalClasses": ["jb-gallery__cell"]
+      },
+      "label": "Cell 1"
+    },
+    {
+      "id": "img001",
+      "name": "image",
+      "parent": "cel001",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "{photo_1_url}",
+          "alt": "Gallery photo 1"
+        },
+        "_width": "100%",
+        "_height": "100%",
+        "_objectFit": "cover",
+        "_cssGlobalClasses": ["jb-gallery__image"]
+      },
+      "label": "Photo 1"
+    },
+    {
+      "id": "cel002",
+      "name": "div",
+      "parent": "grd001",
+      "children": ["img002"],
+      "settings": {
+        "_overflow": "hidden",
+        "_cssGlobalClasses": ["jb-gallery__cell"]
+      },
+      "label": "Cell 2"
+    },
+    {
+      "id": "img002",
+      "name": "image",
+      "parent": "cel002",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "{photo_2_url}",
+          "alt": "Gallery photo 2"
+        },
+        "_width": "100%",
+        "_height": "100%",
+        "_objectFit": "cover",
+        "_cssGlobalClasses": ["jb-gallery__image"]
+      },
+      "label": "Photo 2"
+    },
+    {
+      "id": "cel003",
+      "name": "div",
+      "parent": "grd001",
+      "children": ["img003"],
+      "settings": {
+        "_overflow": "hidden",
+        "_cssGlobalClasses": ["jb-gallery__cell"]
+      },
+      "label": "Cell 3"
+    },
+    {
+      "id": "img003",
+      "name": "image",
+      "parent": "cel003",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "{photo_3_url}",
+          "alt": "Gallery photo 3"
+        },
+        "_width": "100%",
+        "_height": "100%",
+        "_objectFit": "cover",
+        "_cssGlobalClasses": ["jb-gallery__image"]
+      },
+      "label": "Photo 3"
+    },
+    {
+      "id": "cel004",
+      "name": "div",
+      "parent": "grd001",
+      "children": ["img004"],
+      "settings": {
+        "_overflow": "hidden",
+        "_cssGlobalClasses": ["jb-gallery__cell"]
+      },
+      "label": "Cell 4"
+    },
+    {
+      "id": "img004",
+      "name": "image",
+      "parent": "cel004",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "{photo_4_url}",
+          "alt": "Gallery photo 4"
+        },
+        "_width": "100%",
+        "_height": "100%",
+        "_objectFit": "cover",
+        "_cssGlobalClasses": ["jb-gallery__image"]
+      },
+      "label": "Photo 4"
+    },
+    {
+      "id": "col002",
+      "name": "div",
+      "parent": "wrp001",
+      "children": ["cnt001"],
+      "settings": {
+        "_width": "40%",
+        "_width:tablet_portrait": "100%",
+        "_display": "flex",
+        "_alignItems": "center",
+        "_justifyContent": "flex-start",
+        "_position": "relative",
+        "_cssGlobalClasses": ["jb-gallery__content"],
+        "_cssCustom": "#brxe-col002::before {\n  content: '';\n  position: absolute;\n  left: 0;\n  top: var(--space-xl);\n  bottom: var(--space-xl);\n  width: 6px;\n  background: var(--primary);\n}\n\n@media (max-width: 991px) {\n  #brxe-col002::before {\n    top: 0;\n    bottom: auto;\n    left: var(--space-l);\n    right: var(--space-l);\n    width: auto;\n    height: 6px;\n  }\n}"
+      },
+      "label": "Content Column"
+    },
+    {
+      "id": "cnt001",
+      "name": "div",
+      "parent": "col002",
+      "children": ["tag001", "hdg001", "txt001", "met001"],
+      "settings": {
+        "_padding": {
+          "top": "var(--space-xl)",
+          "right": "var(--space-xl)",
+          "bottom": "var(--space-xl)",
+          "left": "var(--space-xl)"
+        },
+        "_maxWidth": "500px"
+      },
+      "label": "Content Inner"
+    },
+    {
+      "id": "tag001",
+      "name": "text-basic",
+      "parent": "cnt001",
+      "children": [],
+      "settings": {
+        "text": "{tag_text}",
+        "_cssGlobalClasses": ["jb-gallery__tag"],
+        "_margin": {
+          "bottom": "var(--space-s)"
+        }
+      },
+      "label": "Tag"
+    },
+    {
+      "id": "hdg001",
+      "name": "heading",
+      "parent": "cnt001",
+      "children": [],
+      "settings": {
+        "text": "{title_text}",
+        "tag": "h1",
+        "_cssGlobalClasses": ["jb-gallery__title"],
+        "_margin": {
+          "bottom": "var(--space-m)"
+        }
+      },
+      "label": "Title"
+    },
+    {
+      "id": "txt001",
+      "name": "text-basic",
+      "parent": "cnt001",
+      "children": [],
+      "settings": {
+        "text": "{description_text}",
+        "_cssGlobalClasses": ["jb-gallery__desc"],
+        "_margin": {
+          "bottom": "var(--space-l)"
+        }
+      },
+      "label": "Description"
+    },
+    {
+      "id": "met001",
+      "name": "div",
+      "parent": "cnt001",
+      "children": ["mt001", "mt002"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_gap": "var(--space-l)",
+        "_flexWrap": "wrap",
+        "_cssGlobalClasses": ["jb-gallery__meta"]
+      },
+      "label": "Meta Row"
+    },
+    {
+      "id": "mt001",
+      "name": "div",
+      "parent": "met001",
+      "children": ["ic001", "mtx001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_alignItems": "center",
+        "_gap": "var(--space-xs)"
+      },
+      "label": "Meta Item 1"
+    },
+    {
+      "id": "ic001",
+      "name": "icon",
+      "parent": "mt001",
+      "children": [],
+      "settings": {
+        "icon": {
+          "library": "fontawesome",
+          "icon": "fas fa-calendar"
+        },
+        "_width": "18px",
+        "_height": "18px",
+        "_color": {
+          "raw": "var(--primary)"
+        }
+      },
+      "label": "Calendar Icon"
+    },
+    {
+      "id": "mtx001",
+      "name": "text-basic",
+      "parent": "mt001",
+      "children": [],
+      "settings": {
+        "text": "{date_text}",
+        "_cssGlobalClasses": ["jb-gallery__meta-text"]
+      },
+      "label": "Date Text"
+    },
+    {
+      "id": "mt002",
+      "name": "div",
+      "parent": "met001",
+      "children": ["ic002", "mtx002"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_alignItems": "center",
+        "_gap": "var(--space-xs)"
+      },
+      "label": "Meta Item 2"
+    },
+    {
+      "id": "ic002",
+      "name": "icon",
+      "parent": "mt002",
+      "children": [],
+      "settings": {
+        "icon": {
+          "library": "fontawesome",
+          "icon": "fas fa-images"
+        },
+        "_width": "18px",
+        "_height": "18px",
+        "_color": {
+          "raw": "var(--primary)"
+        }
+      },
+      "label": "Photos Icon"
+    },
+    {
+      "id": "mtx002",
+      "name": "text-basic",
+      "parent": "mt002",
+      "children": [],
+      "settings": {
+        "text": "{count_text}",
+        "_cssGlobalClasses": ["jb-gallery__meta-text"]
+      },
+      "label": "Photos Count"
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://medsparanker.com",
+  "version": "2.1.4",
+  "globalClasses": [
+    {
+      "id": "gc001",
+      "name": "jb-gallery",
+      "settings": {}
+    },
+    {
+      "id": "gc002",
+      "name": "jb-gallery__grid",
+      "settings": {}
+    },
+    {
+      "id": "gc003",
+      "name": "jb-gallery__cell",
+      "settings": {}
+    },
+    {
+      "id": "gc004",
+      "name": "jb-gallery__image",
+      "settings": {}
+    },
+    {
+      "id": "gc005",
+      "name": "jb-gallery__content",
+      "settings": {}
+    },
+    {
+      "id": "gc006",
+      "name": "jb-gallery__tag",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "600",
+          "letter-spacing": "0.15em",
+          "text-transform": "uppercase",
+          "color": {
+            "raw": "var(--primary)"
+          }
+        }
+      }
+    },
+    {
+      "id": "gc007",
+      "name": "jb-gallery__title",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--h1)",
+          "font-weight": "900",
+          "line-height": "1.1",
+          "color": {
+            "raw": "var(--base)"
+          }
+        }
+      }
+    },
+    {
+      "id": "gc008",
+      "name": "jb-gallery__desc",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "line-height": "1.6",
+          "color": {
+            "raw": "var(--base-light)"
+          }
+        }
+      }
+    },
+    {
+      "id": "gc009",
+      "name": "jb-gallery__meta",
+      "settings": {}
+    },
+    {
+      "id": "gc010",
+      "name": "jb-gallery__meta-text",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "color": {
+            "raw": "var(--base-light)"
+          }
+        }
+      }
+    }
+  ]
+}

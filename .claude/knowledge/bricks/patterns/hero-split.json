@@ -1,0 +1,241 @@
+{
+  "content": [
+    {
+      "id": "sph001",
+      "name": "section",
+      "parent": 0,
+      "children": ["spc001"],
+      "settings": {
+        "_padding": {
+          "top": "var(--section-space-l)",
+          "bottom": "var(--section-space-l)"
+        },
+        "_padding:mobile_portrait": {
+          "top": "var(--section-space-m)",
+          "bottom": "var(--section-space-m)"
+        },
+        "_background": {
+          "color": { "raw": "var(--base)" }
+        }
+      },
+      "label": "Hero Split"
+    },
+    {
+      "id": "spc001",
+      "name": "container",
+      "parent": "sph001",
+      "children": ["spb001", "spb002"],
+      "settings": {
+        "_widthMax": "1360",
+        "_display": "grid",
+        "_gridTemplateColumns": "1fr 1fr",
+        "_gridTemplateColumns:tablet_portrait": "1fr",
+        "_gridGap": "var(--space-xl)",
+        "_alignItems": "center"
+      }
+    },
+    {
+      "id": "spb001",
+      "name": "block",
+      "parent": "spc001",
+      "children": ["spe001", "sph002", "sps001", "spd001"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "column",
+        "_rowGap": "var(--space-m)",
+        "_alignItems": "flex-start",
+        "_alignItems:tablet_portrait": "center",
+        "_textAlign:tablet_portrait": "center"
+      },
+      "label": "Content"
+    },
+    {
+      "id": "spe001",
+      "name": "text-basic",
+      "parent": "spb001",
+      "children": [],
+      "settings": {
+        "text": "Industry Leading",
+        "_cssGlobalClasses": ["jbs001"]
+      },
+      "label": "Eyebrow"
+    },
+    {
+      "id": "sph002",
+      "name": "heading",
+      "parent": "spb001",
+      "children": [],
+      "settings": {
+        "text": "Grow Your Business with Proven Strategies",
+        "tag": "h1",
+        "_cssGlobalClasses": ["jbs002"]
+      }
+    },
+    {
+      "id": "sps001",
+      "name": "text-basic",
+      "parent": "spb001",
+      "children": [],
+      "settings": {
+        "text": "Our comprehensive solutions help businesses of all sizes achieve their goals. Join thousands of satisfied customers who have transformed their operations.",
+        "_cssGlobalClasses": ["jbs003"]
+      },
+      "label": "Description"
+    },
+    {
+      "id": "spd001",
+      "name": "div",
+      "parent": "spb001",
+      "children": ["spn001", "spn002"],
+      "settings": {
+        "_display": "flex",
+        "_direction": "row",
+        "_direction:mobile_portrait": "column",
+        "_columnGap": "var(--space-m)",
+        "_rowGap": "var(--space-s)",
+        "_marginTop": "var(--space-s)"
+      },
+      "label": "Buttons"
+    },
+    {
+      "id": "spn001",
+      "name": "button",
+      "parent": "spd001",
+      "children": [],
+      "settings": {
+        "text": "Start Free Trial",
+        "link": { "type": "external", "url": "/signup" },
+        "_cssGlobalClasses": ["jbs004"]
+      }
+    },
+    {
+      "id": "spn002",
+      "name": "button",
+      "parent": "spd001",
+      "children": [],
+      "settings": {
+        "text": "Watch Demo",
+        "link": { "type": "external", "url": "#demo" },
+        "icon": { "library": "fontawesome", "icon": "fas fa-play" },
+        "iconPosition": "left",
+        "_cssGlobalClasses": ["jbs005"]
+      }
+    },
+    {
+      "id": "spb002",
+      "name": "block",
+      "parent": "spc001",
+      "children": ["spi001"],
+      "settings": {
+        "_order:tablet_portrait": "-1"
+      },
+      "label": "Image"
+    },
+    {
+      "id": "spi001",
+      "name": "image",
+      "parent": "spb002",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "https://medsparanker.com/wp-content/uploads/hero-image.png",
+          "size": "large"
+        },
+        "_width": "100%",
+        "_height": "auto",
+        "_border": {
+          "radius": { "top": "var(--radius-l)", "right": "var(--radius-l)", "bottom": "var(--radius-l)", "left": "var(--radius-l)" }
+        },
+        "_boxShadow": {
+          "offsetX": "0",
+          "offsetY": "20px",
+          "blur": "60px",
+          "color": { "raw": "var(--base-trans-30)" }
+        }
+      }
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://medsparanker.com",
+  "version": "2.1.4",
+  "globalClasses": [
+    {
+      "id": "jbs001",
+      "name": "jb-split__eyebrow",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "600",
+          "text-transform": "uppercase",
+          "letter-spacing": "2px",
+          "color": { "raw": "var(--primary)" }
+        }
+      }
+    },
+    {
+      "id": "jbs002",
+      "name": "jb-split__title",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--h1)",
+          "font-weight": "700",
+          "line-height": "1.1",
+          "color": { "raw": "var(--white)" }
+        },
+        "_typography:tablet_portrait": {
+          "font-size": "var(--h2)"
+        },
+        "_widthMax": "20ch"
+      }
+    },
+    {
+      "id": "jbs003",
+      "name": "jb-split__description",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "line-height": "1.7",
+          "color": { "raw": "var(--neutral)" }
+        },
+        "_widthMax": "50ch"
+      }
+    },
+    {
+      "id": "jbs004",
+      "name": "jb-split__cta",
+      "settings": {
+        "_background": { "color": { "raw": "var(--primary)" } },
+        "_typography": {
+          "color": { "raw": "var(--white)" },
+          "font-weight": "600"
+        },
+        "_padding": {
+          "top": "var(--space-s)",
+          "right": "var(--space-l)",
+          "bottom": "var(--space-s)",
+          "left": "var(--space-l)"
+        },
+        "_border": {
+          "radius": { "top": "var(--radius)", "right": "var(--radius)", "bottom": "var(--radius)", "left": "var(--radius)" }
+        }
+      }
+    },
+    {
+      "id": "jbs005",
+      "name": "jb-split__cta--ghost",
+      "settings": {
+        "_background": { "color": { "raw": "transparent" } },
+        "_typography": {
+          "color": { "raw": "var(--white)" },
+          "font-weight": "500"
+        },
+        "_padding": {
+          "top": "var(--space-s)",
+          "right": "var(--space-m)",
+          "bottom": "var(--space-s)",
+          "left": "0"
+        }
+      }
+    }
+  ]
+}
