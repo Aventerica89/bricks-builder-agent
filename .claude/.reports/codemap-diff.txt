@@ -1,0 +1,24 @@
+Codemap Generation Report
+=========================
+Generated: 2026-01-25T11:30:00Z
+
+Files Created:
+- codemaps/architecture.md (NEW)
+- codemaps/components.md (NEW)
+
+Change Summary:
+- Previous version: None (initial generation)
+- Diff percentage: N/A (first run)
+
+Components Documented:
+- Agents: 10
+- Rules: 8
+- Commands: 16
+- Skills: 12
+- Contexts: 3
+- Hooks: 2 directories
+- Scripts: 8 files
+- Knowledge bases: 1 (bricks/)
+- Projects: 1 (bricks-builder/)
+
+Total tracked files: ~85 (excluding cache, plugins, sessions)
