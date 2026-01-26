@@ -271,12 +271,108 @@ Child elements then use placement classes:
 
 ## Image Placement Strategy
 
-### Option 1: Image Element (Preferred for Content Images)
+### Option 1: Image Element as Background (PREFERRED for Cards)
+
+**This is the proper HTML pattern for cards with background images.**
+
+Use an actual `<image>` element with absolute positioning instead of CSS background.
+This provides better accessibility, SEO, and control.
+
+Structure:
+```
+Block (li) - Card wrapper (position: relative)
+├── Image (figure) - Absolute positioned as background (z-index: -1)
+└── Block - Content overlay (position: absolute, inset: 0)
+    ├── Heading
+    └── Text
+```
+
+```json
+{
+  "id": "card01",
+  "name": "block",
+  "parent": "grid01",
+  "children": ["img001", "ovrl01"],
+  "settings": {
+    "_cssGlobalClasses": ["fr-feature-card"],
+    "_position": "relative",
+    "_heightMin": "25em",
+    "_overflow": "hidden",
+    "_isolation": "isolate",
+    "tag": "custom",
+    "customTag": "li"
+  },
+  "label": "Feature Card"
+}
+```
+
+Image as background:
+```json
+{
+  "id": "img001",
+  "name": "image",
+  "parent": "card01",
+  "children": [],
+  "settings": {
+    "image": {
+      "url": "{image_url}",
+      "alt": "Description of image"
+    },
+    "_cssGlobalClasses": ["fr-feature-card__media"],
+    "_position": "absolute",
+    "_top": "0",
+    "_right": "0",
+    "_bottom": "0",
+    "_left": "0",
+    "_width": "100%",
+    "_height": "100%",
+    "_objectFit": "cover",
+    "_zIndex": "-1",
+    "tag": "figure"
+  }
+}
+```
+
+Content overlay:
+```json
+{
+  "id": "ovrl01",
+  "name": "block",
+  "parent": "card01",
+  "children": ["hdg001", "txt001"],
+  "settings": {
+    "_cssGlobalClasses": ["fr-feature-card__overlay"],
+    "_position": "absolute",
+    "_top": "0",
+    "_right": "0",
+    "_bottom": "0",
+    "_left": "0",
+    "_padding": {
+      "top": "var(--space-l)",
+      "right": "var(--space-l)",
+      "bottom": "var(--space-l)",
+      "left": "var(--space-l)"
+    },
+    "_display": "flex",
+    "_flexDirection": "column",
+    "_alignItems": "center",
+    "_justifyContent": "center",
+    "_background": {
+      "color": { "raw": "var(--black-trans-60)" }
+    }
+  },
+  "label": "Overlay"
+}
+```
+
+See: `~/.claude/knowledge/bricks/patterns/feature-card-with-image-proper.md`
+
+### Option 2: Standard Image Element (For Content Images)
 
 Use `<image>` element when:
-- Image is content (not decorative)
+- Image is standalone content (not a card background)
 - Needs alt text for accessibility
-- Part of a gallery or grid
+- Part of a simple gallery or grid
 - Should be lazy-loaded
 
 ```json
@@ -288,22 +384,27 @@ Use `<image>` element when:
   "settings": {
     "image": {
       "url": "{image_url}",
-      "alt": "Description of image"
+      "alt": "Description of image",
+      "useDynamicData": false
     },
     "_width": "100%",
-    "_height": "auto",
-    "_objectFit": "cover"
+    "_height": "100%",
+    "_objectFit": "cover",
+    "themeStyles": {"caption": "none"}
   }
 }
 ```
 
-### Option 2: Div with Background (For Decorative/Layout)
+**Note:** Always include `themeStyles: {"caption": "none"}` to disable default captions.
 
-Use div with background when:
-- Image is purely decorative
-- Need fixed aspect ratio container
-- Overlay text on image
-- Complex grid layouts with spanning cells
+### Option 3: Div with Background (AVOID for Cards)
+
+**AVOID this pattern for cards with overlays.** Use Option 1 instead.
+
+Only use CSS background for:
+- Purely decorative patterns/textures
+- Simple section backgrounds without content interaction
+- When image doesn't need alt text
 
 ```json
 {
@@ -324,9 +425,9 @@ Use div with background when:
 }
 ```
 
-### Option 3: Block with Background + Content
+### Option 4: Block with Background + Content (Simple Heroes Only)
 
-Use for hero sections with text overlay:
+Use for simple hero sections without complex image interactions:
 
 ```json
 {
@@ -375,6 +476,108 @@ section (parent: 0, class: breakout--full)
     └── div (parent: wrapper, width: 40%)
         └── content...
 ```
+
+### Split Background with Absolute Container
+
+For sections with split backgrounds (e.g., 60% dark / 40% light):
+
+```
+section (relative, min-height, row direction, stretch)
+├── bg-left (absolute, width: 60%, hidden in builder)
+├── bg-right (absolute, width: 40%, hidden in builder)
+└── container (absolute, inset: 0, z-index: 2)
+    └── content grid...
+```
+
+**Key Settings:**
+
+Section:
+```json
+{
+  "_position": "relative",
+  "_heightMin": "60rem",
+  "_direction": "row",
+  "_alignItems": "stretch"
+}
+```
+
+Background divs (hidden structural elements):
+```json
+{
+  "_position": "absolute",
+  "_top": "0",
+  "_left": "0",
+  "_bottom": "0",
+  "_width": "60%",
+  "_background": {"color": {"raw": "var(--dark-blue)"}},
+  "_hideElementBuilder": true,
+  "_hideElementFrontend": true
+}
+```
+
+Container as absolute overlay:
+```json
+{
+  "_position": "absolute",
+  "_top": "0",
+  "_right": "0",
+  "_bottom": "0",
+  "_left": "0",
+  "_cssCustom": "#brxe-{id} {\n  grid-column: full;\n  z-index: 2;\n}"
+}
+```
+
+### Nested Grid for Asymmetric Layouts
+
+For photo grids where columns need different row ratios:
+
+```
+Photo Grid Wrapper (2-column grid)
+├── Left Column Wrapper (grid: 1fr 0.4fr rows)
+│   ├── Image (large)
+│   └── Image (small)
+└── Right Column Wrapper (grid: 0.4fr 1fr rows)
+    ├── Image (small)
+    └── Image (large)
+```
+
+**Pattern:** Create separate wrapper divs with inverted `grid-template-rows`:
+
+Left column (large top, small bottom):
+```json
+{
+  "name": "block",
+  "settings": {
+    "_cssGlobalClasses": ["jb-grid__col-left"],
+    "_cssCustom": ".jb-grid__col-left {\n  display: grid;\n  grid-template-columns: var(--grid-1);\n  grid-template-rows: 1fr 0.4fr;\n}"
+  }
+}
+```
+
+Right column (small top, large bottom):
+```json
+{
+  "name": "block",
+  "settings": {
+    "_cssGlobalClasses": ["jb-grid__col-right"],
+    "_cssCustom": ".jb-grid__col-right {\n  display: grid;\n  grid-template-columns: var(--grid-1);\n  grid-template-rows: 0.4fr 1fr;\n}"
+  }
+}
+```
+
+**CSS Custom Variables in Parent:**
+```json
+{
+  "name": "block",
+  "settings": {
+    "_cssGlobalClasses": ["jb-photo-grid"],
+    "_cssCustom": ".jb-photo-grid {\n  --max-height: 800px;\n  --photo-gap: 1rem;\n}",
+    "_gridGap": "var(--photo-gap)"
+  }
+}
+```
+
+See: `~/.claude/skills/learned/bricks-nested-grid-pattern-for-asymmetric-layouts.md`
 
 ---
 
@@ -432,11 +635,29 @@ Before outputting JSON, verify:
 - [ ] Parent-child relationships are correct
 - [ ] All children arrays contain valid child IDs
 - [ ] ACSS variables used for ALL colors, spacing, typography
+- [ ] **EVERY element has `_cssGlobalClasses`** (no exceptions)
 - [ ] BEM-named global classes created and applied
 - [ ] Responsive styles included for tablet/mobile
 - [ ] `breakout--full` used for full-width sections
 - [ ] Images use appropriate method (element vs background)
 - [ ] JSON is valid and complete
+
+### Every Element Needs a Class (CRITICAL)
+
+**No element should be without a global class.** This follows Frames methodology.
+
+| Element | Required Class Pattern |
+|---------|----------------------|
+| Section | `{prefix}-{component}` |
+| Container | `{prefix}-{component}__container` |
+| Div/Block | `{prefix}-{component}__[role]` |
+| Heading | `{prefix}-{component}__title` |
+| Text | `{prefix}-{component}__text` or `__description` |
+| Image | `{prefix}-{component}__image` or `__media` |
+| Icon | `{prefix}-{component}__icon` |
+| Button | `{prefix}-{component}__btn` or `__cta` |
+
+See: `~/.claude/skills/learned/bricks-every-element-needs-class.md`
 
 ---
 

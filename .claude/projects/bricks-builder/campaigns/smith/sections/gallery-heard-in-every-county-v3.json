@@ -1,0 +1,706 @@
+{
+  "content": [
+    {
+      "id": "sec001",
+      "name": "section",
+      "parent": 0,
+      "children": ["bgldiv", "bgrdiv", "cnt001"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery"],
+        "_position": "relative",
+        "_overflow": "hidden",
+        "_padding": {
+          "top": "0",
+          "right": "0",
+          "bottom": "0",
+          "left": "0"
+        }
+      },
+      "label": "Gallery Section"
+    },
+    {
+      "id": "bgldiv",
+      "name": "div",
+      "parent": "sec001",
+      "children": [],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__bg-left"],
+        "_position": "absolute",
+        "_top": "0",
+        "_bottom": "0",
+        "_left": "0",
+        "_width": "60%",
+        "_zIndex": "0",
+        "_background": {
+          "color": {
+            "raw": "var(--base)"
+          }
+        }
+      },
+      "label": "Background Left"
+    },
+    {
+      "id": "bgrdiv",
+      "name": "div",
+      "parent": "sec001",
+      "children": [],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__bg-right"],
+        "_position": "absolute",
+        "_top": "0",
+        "_bottom": "0",
+        "_right": "0",
+        "_width": "40%",
+        "_zIndex": "0",
+        "_background": {
+          "color": {
+            "raw": "var(--white)"
+          }
+        }
+      },
+      "label": "Background Right"
+    },
+    {
+      "id": "cnt001",
+      "name": "container",
+      "parent": "sec001",
+      "children": ["grd001"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__container"],
+        "_position": "relative",
+        "_zIndex": "1",
+        "_padding": {
+          "top": "var(--space-xxl)",
+          "right": "var(--space-l)",
+          "bottom": "var(--space-xxl)",
+          "left": "var(--space-l)"
+        }
+      },
+      "label": "Container"
+    },
+    {
+      "id": "grd001",
+      "name": "div",
+      "parent": "cnt001",
+      "children": ["phgrid", "cntblk"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__layout"],
+        "_display": "grid",
+        "_gridTemplateColumns": "1.4fr 1fr",
+        "_gridTemplateColumns:tablet_portrait": "1fr",
+        "_gap": "var(--space-xl)",
+        "_alignItems": "center"
+      },
+      "label": "Layout Grid"
+    },
+    {
+      "id": "phgrid",
+      "name": "div",
+      "parent": "grd001",
+      "children": ["photo1", "photo2", "photo3", "photo4"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__photos"],
+        "_display": "grid",
+        "_gridTemplateColumns": "1fr 1fr",
+        "_gridTemplateRows": "1fr 0.4fr 1fr",
+        "_gap": "var(--space-m)"
+      },
+      "label": "Photo Grid"
+    },
+    {
+      "id": "photo1",
+      "name": "block",
+      "parent": "phgrid",
+      "children": ["img001"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__photo"],
+        "_position": "relative",
+        "_gridRow": "1 / 3",
+        "_gridColumn": "1",
+        "_borderRadius": "var(--radius-m)",
+        "_overflow": "hidden",
+        "_isolation": "isolate"
+      },
+      "label": "Photo 1"
+    },
+    {
+      "id": "img001",
+      "name": "image",
+      "parent": "photo1",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "https://smithnew.jbmdcreations.dev/wp-content/themes/bricks/assets/images/placeholder-svg.svg",
+          "full": "https://smithnew.jbmdcreations.dev/wp-content/themes/bricks/assets/images/placeholder-svg.svg",
+          "isPlaceholder": true,
+          "alt": "Bernadette Smith meeting with Michigan voters"
+        },
+        "_cssGlobalClasses": ["sm-gallery__photo-media"],
+        "_position": "absolute",
+        "_top": "0",
+        "_right": "0",
+        "_bottom": "0",
+        "_left": "0",
+        "_width": "100%",
+        "_height": "100%",
+        "_objectFit": "cover",
+        "_zIndex": "-1",
+        "tag": "figure"
+      },
+      "label": "Photo 1 Image"
+    },
+    {
+      "id": "photo2",
+      "name": "block",
+      "parent": "phgrid",
+      "children": ["img002"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__photo"],
+        "_position": "relative",
+        "_gridRow": "1",
+        "_gridColumn": "2",
+        "_borderRadius": "var(--radius-m)",
+        "_overflow": "hidden",
+        "_isolation": "isolate"
+      },
+      "label": "Photo 2"
+    },
+    {
+      "id": "img002",
+      "name": "image",
+      "parent": "photo2",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "https://smithnew.jbmdcreations.dev/wp-content/themes/bricks/assets/images/placeholder-svg.svg",
+          "full": "https://smithnew.jbmdcreations.dev/wp-content/themes/bricks/assets/images/placeholder-svg.svg",
+          "isPlaceholder": true,
+          "alt": "Campaign event in Michigan"
+        },
+        "_cssGlobalClasses": ["sm-gallery__photo-media"],
+        "_position": "absolute",
+        "_top": "0",
+        "_right": "0",
+        "_bottom": "0",
+        "_left": "0",
+        "_width": "100%",
+        "_height": "100%",
+        "_objectFit": "cover",
+        "_zIndex": "-1",
+        "tag": "figure"
+      },
+      "label": "Photo 2 Image"
+    },
+    {
+      "id": "photo3",
+      "name": "block",
+      "parent": "phgrid",
+      "children": ["img003"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__photo"],
+        "_position": "relative",
+        "_gridRow": "2 / 4",
+        "_gridColumn": "2",
+        "_borderRadius": "var(--radius-m)",
+        "_overflow": "hidden",
+        "_isolation": "isolate"
+      },
+      "label": "Photo 3"
+    },
+    {
+      "id": "img003",
+      "name": "image",
+      "parent": "photo3",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "https://smithnew.jbmdcreations.dev/wp-content/themes/bricks/assets/images/placeholder-svg.svg",
+          "full": "https://smithnew.jbmdcreations.dev/wp-content/themes/bricks/assets/images/placeholder-svg.svg",
+          "isPlaceholder": true,
+          "alt": "Community meeting in Michigan"
+        },
+        "_cssGlobalClasses": ["sm-gallery__photo-media"],
+        "_position": "absolute",
+        "_top": "0",
+        "_right": "0",
+        "_bottom": "0",
+        "_left": "0",
+        "_width": "100%",
+        "_height": "100%",
+        "_objectFit": "cover",
+        "_zIndex": "-1",
+        "tag": "figure"
+      },
+      "label": "Photo 3 Image"
+    },
+    {
+      "id": "photo4",
+      "name": "block",
+      "parent": "phgrid",
+      "children": ["img004"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__photo"],
+        "_position": "relative",
+        "_gridRow": "3",
+        "_gridColumn": "1",
+        "_borderRadius": "var(--radius-m)",
+        "_overflow": "hidden",
+        "_isolation": "isolate"
+      },
+      "label": "Photo 4"
+    },
+    {
+      "id": "img004",
+      "name": "image",
+      "parent": "photo4",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "https://smithnew.jbmdcreations.dev/wp-content/themes/bricks/assets/images/placeholder-svg.svg",
+          "full": "https://smithnew.jbmdcreations.dev/wp-content/themes/bricks/assets/images/placeholder-svg.svg",
+          "isPlaceholder": true,
+          "alt": "Voter outreach event"
+        },
+        "_cssGlobalClasses": ["sm-gallery__photo-media"],
+        "_position": "absolute",
+        "_top": "0",
+        "_right": "0",
+        "_bottom": "0",
+        "_left": "0",
+        "_width": "100%",
+        "_height": "100%",
+        "_objectFit": "cover",
+        "_zIndex": "-1",
+        "tag": "figure"
+      },
+      "label": "Photo 4 Image"
+    },
+    {
+      "id": "cntblk",
+      "name": "div",
+      "parent": "grd001",
+      "children": ["eyebr", "hdg001", "txt001", "metarw"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__content"],
+        "_padding": {
+          "top": "var(--space-l)",
+          "right": "var(--space-xl)",
+          "bottom": "var(--space-l)",
+          "left": "var(--space-xl)"
+        },
+        "_padding:tablet_portrait": {
+          "top": "var(--space-l)",
+          "right": "0",
+          "bottom": "var(--space-l)",
+          "left": "0"
+        }
+      },
+      "label": "Content Block"
+    },
+    {
+      "id": "eyebr",
+      "name": "text-basic",
+      "parent": "cntblk",
+      "children": [],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__eyebrow"],
+        "text": "CAMPAIGN MEDIA",
+        "tag": "p",
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "700",
+          "letter-spacing": "0.15em",
+          "text-transform": "uppercase",
+          "color": {
+            "raw": "var(--primary)"
+          }
+        },
+        "_margin": {
+          "bottom": "var(--space-s)"
+        }
+      },
+      "label": "Eyebrow"
+    },
+    {
+      "id": "hdg001",
+      "name": "heading",
+      "parent": "cntblk",
+      "children": [],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__title"],
+        "text": "HEARD IN EVERY COUNTY",
+        "tag": "h2",
+        "_typography": {
+          "font-size": "var(--h2)",
+          "font-weight": "900",
+          "line-height": "1.1",
+          "text-transform": "uppercase",
+          "color": {
+            "raw": "var(--base)"
+          }
+        },
+        "_margin": {
+          "bottom": "var(--space-m)"
+        }
+      },
+      "label": "Title"
+    },
+    {
+      "id": "txt001",
+      "name": "text-basic",
+      "parent": "cntblk",
+      "children": [],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__description"],
+        "text": "A visual journey across Michigan as Bernadette Smith meets with families, community leaders, and voters who share our vision for a stronger America.",
+        "tag": "p",
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "line-height": "1.6",
+          "color": {
+            "raw": "var(--neutral-dark)"
+          }
+        },
+        "_margin": {
+          "bottom": "var(--space-l)"
+        }
+      },
+      "label": "Description"
+    },
+    {
+      "id": "metarw",
+      "name": "div",
+      "parent": "cntblk",
+      "children": ["meta01", "meta02"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__meta"],
+        "_display": "flex",
+        "_flexWrap": "wrap",
+        "_gap": "var(--space-l)",
+        "_alignItems": "center"
+      },
+      "label": "Meta Row"
+    },
+    {
+      "id": "meta01",
+      "name": "div",
+      "parent": "metarw",
+      "children": ["icon01", "mtxt01"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__meta-item"],
+        "_display": "flex",
+        "_gap": "var(--space-xs)",
+        "_alignItems": "center"
+      },
+      "label": "Meta Date"
+    },
+    {
+      "id": "icon01",
+      "name": "icon",
+      "parent": "meta01",
+      "children": [],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__meta-icon"],
+        "icon": {
+          "library": "fontawesome",
+          "icon": "fas fa-calendar-alt"
+        },
+        "_width": "1em",
+        "_height": "1em",
+        "_typography": {
+          "color": {
+            "raw": "var(--primary)"
+          }
+        }
+      },
+      "label": "Calendar Icon"
+    },
+    {
+      "id": "mtxt01",
+      "name": "text-basic",
+      "parent": "meta01",
+      "children": [],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__meta-text"],
+        "text": "Updated January 2026",
+        "tag": "span",
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "color": {
+            "raw": "var(--neutral-dark)"
+          }
+        }
+      },
+      "label": "Date Text"
+    },
+    {
+      "id": "meta02",
+      "name": "div",
+      "parent": "metarw",
+      "children": ["icon02", "mtxt02"],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__meta-item"],
+        "_display": "flex",
+        "_gap": "var(--space-xs)",
+        "_alignItems": "center"
+      },
+      "label": "Meta Photos"
+    },
+    {
+      "id": "icon02",
+      "name": "icon",
+      "parent": "meta02",
+      "children": [],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__meta-icon"],
+        "icon": {
+          "library": "fontawesome",
+          "icon": "fas fa-image"
+        },
+        "_width": "1em",
+        "_height": "1em",
+        "_typography": {
+          "color": {
+            "raw": "var(--primary)"
+          }
+        }
+      },
+      "label": "Image Icon"
+    },
+    {
+      "id": "mtxt02",
+      "name": "text-basic",
+      "parent": "meta02",
+      "children": [],
+      "settings": {
+        "_cssGlobalClasses": ["sm-gallery__meta-text"],
+        "text": "500+ Photos",
+        "tag": "span",
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "color": {
+            "raw": "var(--neutral-dark)"
+          }
+        }
+      },
+      "label": "Photos Text"
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://smithnew.jbmdcreations.dev",
+  "version": "2.1.4",
+  "globalClasses": [
+    {
+      "id": "gc001",
+      "name": "sm-gallery",
+      "settings": {
+        "_position": "relative",
+        "_overflow": "hidden"
+      }
+    },
+    {
+      "id": "gc002",
+      "name": "sm-gallery__bg-left",
+      "settings": {
+        "_position": "absolute",
+        "_top": "0",
+        "_bottom": "0",
+        "_left": "0",
+        "_width": "60%",
+        "_width:tablet_portrait": "100%",
+        "_zIndex": "0",
+        "_background": {
+          "color": {
+            "raw": "var(--base)"
+          }
+        }
+      }
+    },
+    {
+      "id": "gc003",
+      "name": "sm-gallery__bg-right",
+      "settings": {
+        "_position": "absolute",
+        "_top": "0",
+        "_bottom": "0",
+        "_right": "0",
+        "_width": "40%",
+        "_width:tablet_portrait": "100%",
+        "_zIndex": "0",
+        "_background": {
+          "color": {
+            "raw": "var(--white)"
+          }
+        }
+      }
+    },
+    {
+      "id": "gc004",
+      "name": "sm-gallery__container",
+      "settings": {
+        "_position": "relative",
+        "_zIndex": "1"
+      }
+    },
+    {
+      "id": "gc005",
+      "name": "sm-gallery__layout",
+      "settings": {
+        "_display": "grid",
+        "_gridTemplateColumns": "1.4fr 1fr",
+        "_gridTemplateColumns:tablet_portrait": "1fr",
+        "_gap": "var(--space-xl)",
+        "_alignItems": "center"
+      }
+    },
+    {
+      "id": "gc006",
+      "name": "sm-gallery__photos",
+      "settings": {
+        "_display": "grid",
+        "_gridTemplateColumns": "1fr 1fr",
+        "_gridTemplateRows": "1fr 0.4fr 1fr",
+        "_gap": "var(--space-m)"
+      }
+    },
+    {
+      "id": "gc007",
+      "name": "sm-gallery__photo",
+      "settings": {
+        "_position": "relative",
+        "_borderRadius": "var(--radius-m)",
+        "_overflow": "hidden",
+        "_isolation": "isolate"
+      }
+    },
+    {
+      "id": "gc008",
+      "name": "sm-gallery__photo-media",
+      "settings": {
+        "_position": "absolute",
+        "_top": "0",
+        "_right": "0",
+        "_bottom": "0",
+        "_left": "0",
+        "_width": "100%",
+        "_height": "100%",
+        "_objectFit": "cover",
+        "_zIndex": "-1"
+      }
+    },
+    {
+      "id": "gc009",
+      "name": "sm-gallery__content",
+      "settings": {
+        "_padding": {
+          "top": "var(--space-l)",
+          "right": "var(--space-xl)",
+          "bottom": "var(--space-l)",
+          "left": "var(--space-xl)"
+        },
+        "_padding:tablet_portrait": {
+          "top": "var(--space-l)",
+          "right": "0",
+          "bottom": "var(--space-l)",
+          "left": "0"
+        }
+      }
+    },
+    {
+      "id": "gc010",
+      "name": "sm-gallery__eyebrow",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "700",
+          "letter-spacing": "0.15em",
+          "text-transform": "uppercase",
+          "color": {
+            "raw": "var(--primary)"
+          }
+        },
+        "_margin": {
+          "bottom": "var(--space-s)"
+        }
+      }
+    },
+    {
+      "id": "gc011",
+      "name": "sm-gallery__title",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--h2)",
+          "font-weight": "900",
+          "line-height": "1.1",
+          "text-transform": "uppercase",
+          "color": {
+            "raw": "var(--base)"
+          }
+        },
+        "_margin": {
+          "bottom": "var(--space-m)"
+        }
+      }
+    },
+    {
+      "id": "gc012",
+      "name": "sm-gallery__description",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "line-height": "1.6",
+          "color": {
+            "raw": "var(--neutral-dark)"
+          }
+        },
+        "_margin": {
+          "bottom": "var(--space-l)"
+        }
+      }
+    },
+    {
+      "id": "gc013",
+      "name": "sm-gallery__meta",
+      "settings": {
+        "_display": "flex",
+        "_flexWrap": "wrap",
+        "_gap": "var(--space-l)",
+        "_alignItems": "center"
+      }
+    },
+    {
+      "id": "gc014",
+      "name": "sm-gallery__meta-item",
+      "settings": {
+        "_display": "flex",
+        "_gap": "var(--space-xs)",
+        "_alignItems": "center"
+      }
+    },
+    {
+      "id": "gc015",
+      "name": "sm-gallery__meta-icon",
+      "settings": {
+        "_width": "1em",
+        "_height": "1em",
+        "_typography": {
+          "color": {
+            "raw": "var(--primary)"
+          }
+        }
+      }
+    },
+    {
+      "id": "gc016",
+      "name": "sm-gallery__meta-text",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "color": {
+            "raw": "var(--neutral-dark)"
+          }
+        }
+      }
+    }
+  ]
+}

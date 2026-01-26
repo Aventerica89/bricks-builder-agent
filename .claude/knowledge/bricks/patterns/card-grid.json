@@ -20,7 +20,7 @@
       "id": "cgc001",
       "name": "container",
       "parent": "cgs001",
-      "children": ["cgh001", "cgp001", "cgg001"],
+      "children": ["cgh001", "cgg001"],
       "settings": {
         "_widthMax": "1360",
         "_display": "flex",
