@@ -1,5 +1,5 @@
 /**
- * Service Worker - Background script for Env Var Assistant
+ * Service Worker - Background script for Env Var Assistant (Safari)
  */
 
 import { detectApiKeys, isLikelyRealKey } from './lib/patterns.js'
@@ -7,20 +7,22 @@ import { suggestEnvVarName } from './lib/dashboards.js'
 import { selectorRegistry } from './lib/selector-registry.js'
 import * as native from './lib/native-messaging.js'
 
+// Use browser API with chrome fallback
+const api = typeof browser !== 'undefined' ? browser : chrome
+
 // State
-let clipboardCheckInterval = null
 let lastClipboardContent = ''
 
 /**
  * Initialize extension
  */
-chrome.runtime.onInstalled.addListener(async () => {
+api.runtime.onInstalled.addListener(async () => {
   console.log('Env Var Assistant installed')
 
   // Set default settings
-  const settings = await chrome.storage.local.get('settings')
+  const settings = await api.storage.local.get('settings')
   if (!settings.settings) {
-    await chrome.storage.local.set({
+    await api.storage.local.set({
       settings: {
         clipboardMonitoring: true,
         defaultVault: null,
@@ -46,7 +48,7 @@ selectorRegistry.load().catch(error => {
 /**
  * Handle messages from popup and content scripts
  */
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+api.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleMessage(message, sender)
     .then(sendResponse)
     .catch(error => sendResponse({ success: false, error: error.message }))
@@ -175,13 +177,13 @@ async function checkClipboard() {
   try {
     // We need to ask content script to read clipboard
     // since service workers don't have direct clipboard access
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+    const [tab] = await api.tabs.query({ active: true, currentWindow: true })
 
     if (!tab?.id) {
       return { success: false, error: 'No active tab' }
     }
 
-    const response = await chrome.tabs.sendMessage(tab.id, { action: 'readClipboard' })
+    const response = await api.tabs.sendMessage(tab.id, { action: 'readClipboard' })
 
     if (!response?.text) {
       return { success: true, data: null }
@@ -198,8 +200,6 @@ async function checkClipboard() {
     const realKeys = detected.filter(k => isLikelyRealKey(k.value))
 
     if (realKeys.length > 0) {
-      // Show notification for detected keys
-      await showDetectionNotification(realKeys)
       return { success: true, data: realKeys }
     }
 
@@ -210,54 +210,10 @@ async function checkClipboard() {
 }
 
 /**
- * Show notification for detected API keys
- */
-async function showDetectionNotification(detected) {
-  const key = detected[0]
-
-  chrome.notifications.create({
-    type: 'basic',
-    iconUrl: 'icons/icon128.png',
-    title: 'API Key Detected',
-    message: `${key.name} detected in clipboard. Click to save to 1Password.`,
-    buttons: [{ title: 'Save to 1Password' }],
-    requireInteraction: true
-  })
-
-  // Store detected key for when notification is clicked
-  await chrome.storage.session.set({ pendingDetection: detected })
-}
-
-/**
- * Handle notification button clicks
- */
-chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIndex) => {
-  if (buttonIndex === 0) {
-    // Save to 1Password clicked
-    const { pendingDetection } = await chrome.storage.session.get('pendingDetection')
-
-    if (pendingDetection?.length > 0) {
-      const settings = await getSettings()
-      await saveDetectedKey(pendingDetection[0], settings.data?.defaultVault)
-      await chrome.storage.session.remove('pendingDetection')
-
-      chrome.notifications.create({
-        type: 'basic',
-        iconUrl: 'icons/icon128.png',
-        title: 'Saved to 1Password',
-        message: `${pendingDetection[0].name} has been saved.`
-      })
-    }
-  }
-
-  chrome.notifications.clear(notificationId)
-})
-
-/**
  * Get settings from storage
  */
 async function getSettings() {
-  const { settings } = await chrome.storage.local.get('settings')
+  const { settings } = await api.storage.local.get('settings')
   return { success: true, data: settings }
 }
 
@@ -265,9 +221,9 @@ async function getSettings() {
  * Update settings
  */
 async function updateSettings(newSettings) {
-  const { settings } = await chrome.storage.local.get('settings')
+  const { settings } = await api.storage.local.get('settings')
   const merged = { ...settings, ...newSettings }
-  await chrome.storage.local.set({ settings: merged })
+  await api.storage.local.set({ settings: merged })
   return { success: true, data: merged }
 }
 
@@ -276,7 +232,7 @@ async function updateSettings(newSettings) {
  */
 async function fillEnvVar(tabId, envVarName, value) {
   try {
-    await chrome.tabs.sendMessage(tabId, {
+    await api.tabs.sendMessage(tabId, {
       action: 'fillEnvVar',
       envVarName,
       value

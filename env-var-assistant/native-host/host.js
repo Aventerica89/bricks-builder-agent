@@ -154,7 +154,7 @@ function readSecret(reference) {
  * Create a new API credential item
  */
 function createApiCredential(options) {
-  const { title, credential, dashboardUrl, sourceUrl, tags, vault, envVarName } = options
+  const { title, credential, dashboardUrl, sourceUrl, tags, vault, envVarName, project } = options
 
   const args = [
     'item', 'create',
@@ -191,6 +191,14 @@ function createApiCredential(options) {
 
   if (envVarName) {
     args.push(`env_var_name=${envVarName}`)
+  }
+
+  if (project) {
+    // Sanitize project name (alphanumeric, hyphens, underscores only)
+    const sanitized = String(project).replace(/[^a-zA-Z0-9_-]/g, '')
+    if (sanitized) {
+      args.push(`project=${sanitized}`)
+    }
   }
 
   args.push('--format=json')
