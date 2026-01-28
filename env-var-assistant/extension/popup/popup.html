@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Env Var Assistant</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Env Var Assistant</h1>
+      <div id="connection-status" class="status">
+        <span class="status-dot"></span>
+        <span class="status-text">Checking...</span>
+      </div>
+    </header>
+
+    <main>
+      <!-- Detection Section -->
+      <section id="detection-section" class="section">
+        <h2>Clipboard Detection</h2>
+        <button id="check-clipboard" class="btn btn-primary">
+          Check Clipboard
+        </button>
+        <div id="detected-keys" class="key-list"></div>
+      </section>
+
+      <!-- Saved Secrets Section -->
+      <section id="secrets-section" class="section">
+        <h2>Saved Env Vars</h2>
+        <div id="secrets-list" class="key-list">
+          <div class="loading">Loading...</div>
+        </div>
+        <button id="refresh-secrets" class="btn btn-secondary">
+          Refresh
+        </button>
+      </section>
+
+      <!-- Settings Section -->
+      <section id="settings-section" class="section collapsed">
+        <h2 class="collapsible" data-target="settings-content">
+          Settings
+          <span class="chevron">▼</span>
+        </h2>
+        <div id="settings-content" class="collapsible-content">
+          <div class="setting">
+            <label>
+              <input type="checkbox" id="clipboard-monitoring">
+              Enable clipboard monitoring
+            </label>
+          </div>
+          <div class="setting">
+            <label>
+              <input type="checkbox" id="auto-fill">
+              Enable auto-fill on dashboards
+            </label>
+          </div>
+          <div class="setting">
+            <label for="default-vault">Default Vault</label>
+            <input type="text" id="default-vault" placeholder="Private">
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a href="#" id="open-1password">Open 1Password</a>
+      <span class="version">v1.0.0</span>
+    </footer>
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

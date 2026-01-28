@@ -1,0 +1,9 @@
+{
+  "name": "com.envvar.assistant",
+  "description": "Env Var Assistant Native Messaging Host",
+  "path": "/Users/jb/env-var-assistant/native-host/host.js",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://EXTENSION_ID_PLACEHOLDER/"
+  ]
+}
