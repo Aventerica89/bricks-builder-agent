@@ -154,7 +154,7 @@ function readSecret(reference) {
  * Create a new API credential item
  */
 function createApiCredential(options) {
-  const { title, credential, dashboardUrl, tags, vault, envVarName } = options
+  const { title, credential, dashboardUrl, sourceUrl, tags, vault, envVarName } = options
 
   const args = [
     'item', 'create',
@@ -177,6 +177,18 @@ function createApiCredential(options) {
     args.push(`dashboard_url=${dashboardUrl}`)
   }
 
+  if (sourceUrl) {
+    // Validate URL format before passing to CLI
+    try {
+      const url = new URL(sourceUrl)
+      if (['http:', 'https:'].includes(url.protocol)) {
+        args.push(`source_url=${sourceUrl}`)
+      }
+    } catch {
+      // Skip invalid URLs silently
+    }
+  }
+
   if (envVarName) {
     args.push(`env_var_name=${envVarName}`)
   }
@@ -197,6 +209,11 @@ function createApiCredential(options) {
  * Get item details
  */
 function getItem(itemId, vault) {
+  // Validate itemId format (1Password item IDs are alphanumeric with hyphens)
+  if (!/^[a-zA-Z0-9-]+$/.test(itemId)) {
+    throw new Error('Invalid item ID format')
+  }
+
   const args = ['item', 'get', itemId, '--format=json']
 
   if (vault) {
@@ -205,6 +222,79 @@ function getItem(itemId, vault) {
 
   const result = opCommand(args)
   return JSON.parse(result)
+}
+
+/**
+ * Search items by title or tags
+ */
+function searchItems(query, vault, tags) {
+  const args = ['item', 'list', '--format=json']
+
+  if (vault) {
+    args.push(`--vault=${vault}`)
+  }
+
+  if (tags && tags.length > 0) {
+    args.push(`--tags=${tags.join(',')}`)
+  }
+
+  const result = opCommand(args)
+
+  if (!result) {
+    return []
+  }
+
+  const items = JSON.parse(result)
+
+  // Filter by query if provided (case-insensitive title match)
+  const filtered = query
+    ? items.filter(item =>
+        item.title.toLowerCase().includes(query.toLowerCase())
+      )
+    : items
+
+  return filtered.map(item => ({
+    id: item.id,
+    title: item.title,
+    vault: item.vault?.name,
+    category: item.category,
+    tags: item.tags || []
+  }))
+}
+
+/**
+ * Update an existing item by adding or modifying a field
+ */
+function updateItemField(itemId, fieldName, fieldValue, vault, section) {
+  // Validate itemId format
+  if (!itemId || !/^[a-zA-Z0-9-]+$/.test(itemId)) {
+    throw new Error('Invalid item ID format')
+  }
+
+  // Validate field name (alphanumeric, underscores, hyphens)
+  if (!fieldName || !/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(fieldName)) {
+    throw new Error('Invalid field name format')
+  }
+
+  const args = ['item', 'edit', itemId]
+
+  if (vault) {
+    args.push(`--vault=${vault}`)
+  }
+
+  // Build field assignment - with section if provided
+  const fieldPath = section ? `${section}.${fieldName}` : fieldName
+  args.push(`${fieldPath}=${fieldValue}`)
+  args.push('--format=json')
+
+  const result = opCommand(args)
+  const item = JSON.parse(result)
+
+  return {
+    id: item.id,
+    title: item.title,
+    vault: item.vault?.name
+  }
 }
 
 /**
@@ -239,6 +329,20 @@ function handleMessage(message) {
 
       case 'get':
         result = getItem(params.itemId, params.vault)
+        break
+
+      case 'search':
+        result = searchItems(params.query, params.vault, params.tags)
+        break
+
+      case 'updateField':
+        result = updateItemField(
+          params.itemId,
+          params.fieldName,
+          params.fieldValue,
+          params.vault,
+          params.section
+        )
         break
 
       default:

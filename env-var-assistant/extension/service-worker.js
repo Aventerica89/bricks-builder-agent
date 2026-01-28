@@ -4,6 +4,7 @@
 
 import { detectApiKeys, isLikelyRealKey } from './lib/patterns.js'
 import { suggestEnvVarName } from './lib/dashboards.js'
+import { selectorRegistry } from './lib/selector-registry.js'
 import * as native from './lib/native-messaging.js'
 
 // State
@@ -27,6 +28,19 @@ chrome.runtime.onInstalled.addListener(async () => {
       }
     })
   }
+
+  // Load selector registry
+  try {
+    await selectorRegistry.load()
+    console.log('Selector registry loaded, version:', selectorRegistry.getVersion())
+  } catch (error) {
+    console.warn('Failed to load selector registry:', error)
+  }
+})
+
+// Also load on service worker startup (for when it restarts)
+selectorRegistry.load().catch(error => {
+  console.warn('Failed to load selector registry on startup:', error)
 })
 
 /**
@@ -65,6 +79,27 @@ async function handleMessage(message, sender) {
 
     case 'fillEnvVar':
       return fillEnvVar(message.tabId, message.envVarName, message.value)
+
+    case 'getItem':
+      return getItemDetails(message.itemId, message.vault)
+
+    case 'searchItems':
+      return searchExistingItems(message.query, message.tags, message.vault)
+
+    case 'addToExistingItem':
+      return addToExistingItem(
+        message.itemId,
+        message.fieldName,
+        message.fieldValue,
+        message.vault,
+        message.section
+      )
+
+    case 'getSelectors':
+      return getSelectors()
+
+    case 'refreshSelectors':
+      return refreshSelectors()
 
     default:
       throw new Error(`Unknown action: ${message.action}`)
@@ -112,13 +147,19 @@ async function readSecret(reference) {
  */
 async function saveDetectedKey(detected, vault) {
   try {
+    // Use provided envVarName or fall back to suggested name
+    const envVarName = detected.envVarName || suggestEnvVarName(detected.provider)
+    // Use envVarName as title if it looks better than the generic name
+    const title = detected.envVarName || detected.name
+
     const result = await native.createApiCredential({
-      title: detected.name,
+      title,
       credential: detected.value,
       dashboardUrl: detected.dashboardUrl,
+      sourceUrl: detected.sourceUrl,
       tags: detected.tags,
       vault,
-      envVarName: suggestEnvVarName(detected.provider)
+      envVarName
     })
     return { success: true, data: result }
   } catch (error) {
@@ -240,6 +281,95 @@ async function fillEnvVar(tabId, envVarName, value) {
       value
     })
     return { success: true }
+  } catch (error) {
+    return { success: false, error: error.message }
+  }
+}
+
+/**
+ * Get item details from 1Password
+ */
+async function getItemDetails(itemId, vault) {
+  try {
+    const item = await native.getItem(itemId, vault)
+    return { success: true, data: item }
+  } catch (error) {
+    return { success: false, error: error.message }
+  }
+}
+
+/**
+ * Search for existing items by query and/or tags
+ */
+async function searchExistingItems(query, tags, vault) {
+  try {
+    const items = await native.searchItems({ query, tags, vault })
+    return { success: true, data: items }
+  } catch (error) {
+    return { success: false, error: error.message }
+  }
+}
+
+/**
+ * Add a field to an existing 1Password item
+ */
+async function addToExistingItem(itemId, fieldName, fieldValue, vault, section) {
+  try {
+    const result = await native.updateItemField({
+      itemId,
+      fieldName,
+      fieldValue,
+      vault,
+      section
+    })
+    return { success: true, data: result }
+  } catch (error) {
+    return { success: false, error: error.message }
+  }
+}
+
+/**
+ * Get dashboard selectors from registry
+ */
+async function getSelectors() {
+  try {
+    // Ensure registry is loaded
+    if (!selectorRegistry.loaded) {
+      await selectorRegistry.load()
+    }
+
+    // Convert registry to format suitable for content script
+    const selectors = {}
+    for (const provider of selectorRegistry.getAllProviders()) {
+      selectors[provider.id] = {
+        name: provider.name,
+        urlPatterns: provider.urlPatterns.map(p => p.source), // Convert RegExp to string
+        selectors: provider.selectors,
+        readOnly: provider.readOnly
+      }
+    }
+
+    return {
+      success: true,
+      data: selectors,
+      version: selectorRegistry.getVersion()
+    }
+  } catch (error) {
+    return { success: false, error: error.message }
+  }
+}
+
+/**
+ * Force refresh selectors from remote
+ */
+async function refreshSelectors() {
+  try {
+    await selectorRegistry.clearCache()
+    await selectorRegistry.load()
+    return {
+      success: true,
+      version: selectorRegistry.getVersion()
+    }
   } catch (error) {
     return { success: false, error: error.message }
   }

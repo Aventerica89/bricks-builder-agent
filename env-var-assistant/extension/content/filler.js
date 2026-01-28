@@ -1,6 +1,66 @@
 /**
  * Content script for auto-filling env vars on provider dashboards
+ * Uses SelectorRegistry for community-maintained selectors with fallback
  */
+
+// Cached selector config from registry
+let selectorConfig = null
+
+// Fallback selectors (used when registry unavailable)
+const FALLBACK_SELECTORS = {
+  cloudflare: {
+    workers: {
+      test: () => /dash\.cloudflare\.com\/[^/]+\/workers/.test(location.href),
+      nameInput: 'input[name="name"], input[data-testid="variable-name"]',
+      valueInput: 'input[name="value"], textarea[data-testid="variable-value"]',
+      form: 'form[data-testid="add-secret-form"]'
+    },
+    pages: {
+      test: () => /dash\.cloudflare\.com\/[^/]+\/pages/.test(location.href),
+      nameInput: 'input[name="name"]',
+      valueInput: 'input[name="value"], textarea[name="value"]',
+      form: 'form'
+    }
+  },
+  vercel: {
+    test: () => /vercel\.com/.test(location.href),
+    nameInput: 'input[name="key"], input[placeholder*="Name"]',
+    valueInput: 'input[name="value"], textarea[name="value"], input[placeholder*="Value"]',
+    form: 'form'
+  },
+  netlify: {
+    test: () => /app\.netlify\.com/.test(location.href),
+    nameInput: 'input[name="key"], input[id*="key"]',
+    valueInput: 'textarea[name="value"], input[name="value"]',
+    form: 'form'
+  },
+  github: {
+    test: () => /github\.com\/.*\/settings\/secrets/.test(location.href),
+    nameInput: '#secret_name, input[name="secret_name"]',
+    valueInput: '#secret_value, textarea[name="secret_value"]',
+    form: 'form'
+  },
+  supabase: {
+    test: () => /supabase\.com\/dashboard/.test(location.href),
+    readOnly: true
+  }
+}
+
+/**
+ * Load selectors from service worker (which uses SelectorRegistry)
+ */
+async function loadSelectors() {
+  try {
+    const response = await chrome.runtime.sendMessage({ action: 'getSelectors' })
+    if (response?.success && response.data) {
+      selectorConfig = response.data
+      return true
+    }
+  } catch (error) {
+    console.warn('Failed to load selectors from registry:', error)
+  }
+  return false
+}
 
 // Listen for fill commands from service worker
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -16,71 +76,50 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     sendResponse(info)
     return false
   }
+
+  if (message.action === 'updateSelectors') {
+    // Update cached selectors when registry updates
+    selectorConfig = message.selectors
+    sendResponse({ success: true })
+    return false
+  }
 })
 
 /**
- * Dashboard-specific selectors
- */
-const DASHBOARD_SELECTORS = {
-  cloudflare: {
-    // Workers secrets page
-    workers: {
-      test: () => /dash\.cloudflare\.com\/[^/]+\/workers/.test(location.href),
-      nameInput: 'input[name="name"], input[data-testid="variable-name"]',
-      valueInput: 'input[name="value"], textarea[data-testid="variable-value"]',
-      form: 'form[data-testid="add-secret-form"]'
-    },
-    // Pages env vars
-    pages: {
-      test: () => /dash\.cloudflare\.com\/[^/]+\/pages/.test(location.href),
-      nameInput: 'input[name="name"]',
-      valueInput: 'input[name="value"], textarea[name="value"]',
-      form: 'form'
-    }
-  },
-
-  vercel: {
-    test: () => /vercel\.com/.test(location.href),
-    nameInput: 'input[name="key"], input[placeholder*="Name"]',
-    valueInput: 'input[name="value"], textarea[name="value"], input[placeholder*="Value"]',
-    form: 'form'
-  },
-
-  netlify: {
-    test: () => /app\.netlify\.com/.test(location.href),
-    nameInput: 'input[name="key"], input[id*="key"]',
-    valueInput: 'textarea[name="value"], input[name="value"]',
-    form: 'form'
-  },
-
-  github: {
-    test: () => /github\.com\/.*\/settings\/secrets/.test(location.href),
-    nameInput: '#secret_name, input[name="secret_name"]',
-    valueInput: '#secret_value, textarea[name="secret_value"]',
-    form: 'form'
-  },
-
-  supabase: {
-    test: () => /supabase\.com\/dashboard/.test(location.href),
-    // Supabase doesn't have direct env var inputs in the same way
-    // Keys are displayed, not editable
-    readOnly: true
-  }
-}
-
-/**
  * Get info about current dashboard
+ * First tries registry selectors, then falls back to bundled
  */
 function getDashboardInfo() {
   const url = location.href
 
-  for (const [name, config] of Object.entries(DASHBOARD_SELECTORS)) {
+  // Try registry selectors first
+  if (selectorConfig) {
+    for (const [id, config] of Object.entries(selectorConfig)) {
+      if (config.urlPatterns) {
+        for (const pattern of config.urlPatterns) {
+          if (new RegExp(pattern).test(url)) {
+            return {
+              dashboard: id,
+              url,
+              readOnly: config.readOnly || false,
+              hasForm: !config.readOnly && config.selectors?.form && !!document.querySelector(config.selectors.form),
+              source: 'registry'
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Fall back to bundled selectors
+  for (const [name, config] of Object.entries(FALLBACK_SELECTORS)) {
     if (typeof config.test === 'function' && config.test()) {
       return {
         dashboard: name,
         url,
         readOnly: config.readOnly || false,
-        hasForm: !config.readOnly && !!document.querySelector(config.form)
+        hasForm: !config.readOnly && !!document.querySelector(config.form),
+        source: 'fallback'
       }
     }
 
@@ -91,7 +130,8 @@ function getDashboardInfo() {
           dashboard: `${name}.${subName}`,
           url,
           readOnly: subConfig.readOnly || false,
-          hasForm: !subConfig.readOnly && !!document.querySelector(subConfig.form)
+          hasForm: !subConfig.readOnly && !!document.querySelector(subConfig.form),
+          source: 'fallback'
         }
       }
     }
@@ -104,6 +144,11 @@ function getDashboardInfo() {
  * Fill env var fields on current page
  */
 async function fillEnvVar(name, value) {
+  // Try to load selectors if not already loaded
+  if (!selectorConfig) {
+    await loadSelectors()
+  }
+
   const dashboardInfo = getDashboardInfo()
 
   if (!dashboardInfo.dashboard) {
@@ -114,7 +159,7 @@ async function fillEnvVar(name, value) {
     throw new Error('This dashboard does not support filling env vars')
   }
 
-  const config = getConfigForDashboard(dashboardInfo.dashboard)
+  const config = getConfigForDashboard(dashboardInfo)
 
   if (!config) {
     throw new Error(`No config for dashboard: ${dashboardInfo.dashboard}`)
@@ -139,11 +184,19 @@ async function fillEnvVar(name, value) {
 
 /**
  * Get config for a dashboard identifier
+ * Tries registry first, then falls back to bundled
  */
-function getConfigForDashboard(dashboard) {
-  const parts = dashboard.split('.')
+function getConfigForDashboard(dashboardInfo) {
+  const dashboard = dashboardInfo.dashboard
 
-  let config = DASHBOARD_SELECTORS[parts[0]]
+  // Try registry selectors first
+  if (dashboardInfo.source === 'registry' && selectorConfig && selectorConfig[dashboard]) {
+    return selectorConfig[dashboard].selectors
+  }
+
+  // Fall back to bundled selectors
+  const parts = dashboard.split('.')
+  let config = FALLBACK_SELECTORS[parts[0]]
 
   if (parts.length > 1 && config) {
     config = config[parts[1]]
@@ -188,7 +241,12 @@ async function fillInput(input, value) {
 /**
  * Create floating action button for easy access
  */
-function createFloatingButton() {
+async function createFloatingButton() {
+  // Try to load selectors if not already loaded
+  if (!selectorConfig) {
+    await loadSelectors()
+  }
+
   const dashboardInfo = getDashboardInfo()
 
   if (!dashboardInfo.dashboard || dashboardInfo.readOnly) {

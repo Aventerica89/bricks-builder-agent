@@ -312,3 +312,253 @@ describe('Pattern Specificity', () => {
     assert.strictEqual(result.length, 2)
   })
 })
+
+/**
+ * Parse environment variable lines from text
+ * Supports: KEY=value, KEY="value", KEY  value (tab-separated)
+ */
+function parseEnvVarPairs(text) {
+  const pairs = []
+  const seen = new Set()
+
+  // Pattern 1: KEY=value or KEY="value" or KEY='value'
+  const envPattern = /^([A-Z_][A-Z0-9_]*)\s*=\s*["']?([^"'\n\r]+?)["']?\s*$/gm
+
+  // Pattern 2: Tab-separated (from HTML table copy)
+  const tabPattern = /^([A-Z_][A-Z0-9_]*)\t+(\S+)$/gm
+
+  let match
+  while ((match = envPattern.exec(text)) !== null) {
+    const envVarName = match[1]
+    const value = match[2].trim()
+    const key = `${envVarName}:${value}`
+
+    if (value && !seen.has(key)) {
+      seen.add(key)
+      pairs.push({ envVarName, value })
+    }
+  }
+
+  while ((match = tabPattern.exec(text)) !== null) {
+    const envVarName = match[1]
+    const value = match[2].trim()
+    const key = `${envVarName}:${value}`
+
+    if (value && !seen.has(key)) {
+      seen.add(key)
+      pairs.push({ envVarName, value })
+    }
+  }
+
+  return pairs
+}
+
+/**
+ * Check if a value looks like a secret
+ */
+function looksLikeSecret(value) {
+  if (!value || typeof value !== 'string') {
+    return false
+  }
+
+  const trimmed = value.trim()
+
+  if (trimmed.length < 16 || trimmed.length > 500) {
+    return false
+  }
+
+  if (/\s/.test(trimmed)) {
+    return false
+  }
+
+  const secretIndicators = [
+    // Starts with common API key prefixes
+    /^(sk[-_]|pk[-_]|api[-_]|key[-_]|token[-_]|secret[-_]|auth[-_])/i,
+    // Provider-specific prefixes (sb_ = Supabase, re_ = Resend, phc_ = PostHog, etc.)
+    /^(sb_|re_|phc_|lin_api_|nfp_|rnd_|fo1_|dop_v1_|r8_|hf_|ghp_|gho_|ghs_|ghu_|glpat-|npm_|dckr_pat_|shpat_|shpss_|whsec_)/,
+    // Contains mix of alphanumeric and special chars typical of tokens (min 24 chars)
+    /^[a-zA-Z0-9_-]{24,}$/,
+    // JWT format
+    /^eyJ[a-zA-Z0-9_-]+\.eyJ[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+$/,
+    // Base64-like with significant length
+    /^[A-Za-z0-9+/]{32,}={0,2}$/,
+    // Hex strings of typical key lengths
+    /^[a-fA-F0-9]{32,64}$/,
+    // UUID format (common for API keys)
+    /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i,
+    // Connection strings
+    /^(mongodb\+srv|redis|rediss|postgres|postgresql):\/\//,
+    // Webhook URLs
+    /^https:\/\/hooks\.(slack|discord)/
+  ]
+
+  return secretIndicators.some(pattern => pattern.test(trimmed))
+}
+
+/**
+ * Deduplicate detected keys by value
+ */
+function dedupeByValue(keys) {
+  const seen = new Set()
+  return keys.filter(key => {
+    if (seen.has(key.value)) {
+      return false
+    }
+    seen.add(key.value)
+    return true
+  })
+}
+
+describe('Multi-Key Parsing - parseEnvVarPairs', () => {
+  test('parses single KEY=value pair', () => {
+    const result = parseEnvVarPairs('OPENAI_API_KEY=sk-test123456')
+    assert.strictEqual(result.length, 1)
+    assert.strictEqual(result[0].envVarName, 'OPENAI_API_KEY')
+    assert.strictEqual(result[0].value, 'sk-test123456')
+  })
+
+  test('parses multiple KEY=value pairs', () => {
+    const text = `SUPABASE_URL=https://xyz.supabase.co
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.service`
+
+    const result = parseEnvVarPairs(text)
+    assert.strictEqual(result.length, 3)
+    assert.strictEqual(result[0].envVarName, 'SUPABASE_URL')
+    assert.strictEqual(result[1].envVarName, 'SUPABASE_ANON_KEY')
+    assert.strictEqual(result[2].envVarName, 'SUPABASE_SERVICE_ROLE_KEY')
+  })
+
+  test('parses quoted values', () => {
+    const text = `DATABASE_URL="postgres://user:pass@localhost/db"
+API_KEY='sk-secret123'`
+
+    const result = parseEnvVarPairs(text)
+    assert.strictEqual(result.length, 2)
+    assert.strictEqual(result[0].value, 'postgres://user:pass@localhost/db')
+    assert.strictEqual(result[1].value, 'sk-secret123')
+  })
+
+  test('handles spaces around equals sign', () => {
+    const result = parseEnvVarPairs('API_KEY = test-value-123')
+    assert.strictEqual(result.length, 1)
+    assert.strictEqual(result[0].envVarName, 'API_KEY')
+    assert.strictEqual(result[0].value, 'test-value-123')
+  })
+
+  test('parses tab-separated format (HTML table copy)', () => {
+    const text = `STRIPE_KEY\tsk_live_abcdef123456
+STRIPE_WEBHOOK\twhsec_xyz789`
+
+    const result = parseEnvVarPairs(text)
+    assert.strictEqual(result.length, 2)
+    assert.strictEqual(result[0].envVarName, 'STRIPE_KEY')
+    assert.strictEqual(result[0].value, 'sk_live_abcdef123456')
+    assert.strictEqual(result[1].envVarName, 'STRIPE_WEBHOOK')
+    assert.strictEqual(result[1].value, 'whsec_xyz789')
+  })
+
+  test('ignores comments and empty lines', () => {
+    const text = `# This is a comment
+VALID_KEY=value123
+
+# Another comment
+ANOTHER_KEY=value456`
+
+    const result = parseEnvVarPairs(text)
+    assert.strictEqual(result.length, 2)
+  })
+
+  test('deduplicates identical entries', () => {
+    const text = `API_KEY=same-value
+API_KEY=same-value`
+
+    const result = parseEnvVarPairs(text)
+    assert.strictEqual(result.length, 1)
+  })
+
+  test('returns empty array for text without key-value pairs', () => {
+    const result = parseEnvVarPairs('Hello world, no env vars here')
+    assert.strictEqual(result.length, 0)
+  })
+})
+
+describe('Secret Detection - looksLikeSecret', () => {
+  test('detects values starting with common prefixes', () => {
+    assert.strictEqual(looksLikeSecret('sk_test_abcdef123456789012345'), true)
+    assert.strictEqual(looksLikeSecret('pk_live_abcdef123456789012345'), true)
+    assert.strictEqual(looksLikeSecret('api_key_abcdef123456789012345'), true)
+    assert.strictEqual(looksLikeSecret('token_abcdef123456789012345'), true)
+    assert.strictEqual(looksLikeSecret('secret_abcdef123456789012345'), true)
+  })
+
+  test('detects provider-specific prefixes', () => {
+    assert.strictEqual(looksLikeSecret('sb_publishable_A37HZZxM5RkwKz76m1h0pw_Yji7L'), true) // Supabase
+    assert.strictEqual(looksLikeSecret('re_abcdefghij1234567890abcdefghij12'), true) // Resend
+    assert.strictEqual(looksLikeSecret('phc_abcdefghij1234567890abcdefghij12'), true) // PostHog
+    assert.strictEqual(looksLikeSecret('lin_api_abcdefghij1234567890abcdefghij12345678'), true) // Linear
+    assert.strictEqual(looksLikeSecret('whsec_abcdefghij1234567890abcdefghij12'), true) // Stripe webhook
+  })
+
+  test('detects long alphanumeric strings (24+ chars)', () => {
+    assert.strictEqual(looksLikeSecret('abc123def456ghi789jkl012mno345pq'), true) // 32 chars
+    assert.strictEqual(looksLikeSecret('abc123def456ghi789jkl012'), true) // 24 chars - now passes
+    assert.strictEqual(looksLikeSecret('abc123def456ghi789jkl0'), false) // 22 chars - too short
+  })
+
+  test('detects JWT tokens', () => {
+    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U'
+    assert.strictEqual(looksLikeSecret(jwt), true)
+  })
+
+  test('detects hex strings of typical key lengths', () => {
+    assert.strictEqual(looksLikeSecret('a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4'), true) // 32 hex chars
+    assert.strictEqual(looksLikeSecret('a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2'), true) // 64 hex chars
+  })
+
+  test('rejects short values', () => {
+    assert.strictEqual(looksLikeSecret('short'), false)
+    assert.strictEqual(looksLikeSecret('a'.repeat(15)), false)
+  })
+
+  test('rejects values with spaces', () => {
+    assert.strictEqual(looksLikeSecret('this has spaces in it'), false)
+  })
+
+  test('rejects null/undefined/non-string values', () => {
+    assert.strictEqual(looksLikeSecret(null), false)
+    assert.strictEqual(looksLikeSecret(undefined), false)
+    assert.strictEqual(looksLikeSecret(12345), false)
+  })
+
+  test('rejects common non-secret strings', () => {
+    assert.strictEqual(looksLikeSecret('localhost'), false)
+    assert.strictEqual(looksLikeSecret('development'), false)
+  })
+})
+
+describe('Deduplication - dedupeByValue', () => {
+  test('removes duplicate values', () => {
+    const keys = [
+      { provider: 'openai', value: 'sk-abc123' },
+      { provider: 'openai', value: 'sk-abc123' },
+      { provider: 'anthropic', value: 'sk-ant-xyz' }
+    ]
+    const result = dedupeByValue(keys)
+    assert.strictEqual(result.length, 2)
+  })
+
+  test('preserves first occurrence', () => {
+    const keys = [
+      { provider: 'openai', name: 'First', value: 'same-value' },
+      { provider: 'openai', name: 'Second', value: 'same-value' }
+    ]
+    const result = dedupeByValue(keys)
+    assert.strictEqual(result[0].name, 'First')
+  })
+
+  test('handles empty array', () => {
+    const result = dedupeByValue([])
+    assert.strictEqual(result.length, 0)
+  })
+})

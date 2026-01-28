@@ -155,3 +155,41 @@ export async function getItem(itemId, vault) {
     vault
   })
 }
+
+/**
+ * Search items by title or tags
+ * @param {Object} options
+ * @param {string} [options.query] - Search query for title
+ * @param {string[]} [options.tags] - Tags to filter by
+ * @param {string} [options.vault] - Optional vault name
+ */
+export async function searchItems({ query, tags, vault }) {
+  await connect()
+  return sendMessage({
+    action: 'search',
+    query,
+    tags,
+    vault
+  })
+}
+
+/**
+ * Update an existing item by adding or modifying a field
+ * @param {Object} options
+ * @param {string} options.itemId - Item ID
+ * @param {string} options.fieldName - Field name to add/update
+ * @param {string} options.fieldValue - Field value
+ * @param {string} [options.vault] - Optional vault name
+ * @param {string} [options.section] - Optional section name
+ */
+export async function updateItemField({ itemId, fieldName, fieldValue, vault, section }) {
+  await connect()
+  return sendMessage({
+    action: 'updateField',
+    itemId,
+    fieldName,
+    fieldValue,
+    vault,
+    section
+  })
+}
