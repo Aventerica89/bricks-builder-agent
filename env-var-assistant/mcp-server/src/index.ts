@@ -21,6 +21,98 @@ const OP_PATH = '/opt/homebrew/bin/op'
 const DEFAULT_VAULT = 'Private'
 const ENV_VAR_TAG = 'env-var'
 
+// Supported deployment platforms
+type Platform = 'vercel' | 'netlify' | 'cloudflare' | 'github' | 'railway' | 'fly'
+
+interface PlatformConfig {
+  name: string
+  cli: string
+  checkCommand: string[]
+  deployCommand: (envName: string, value: string, options: DeployOptions) => string[]
+  environments?: string[]
+}
+
+interface DeployOptions {
+  environment?: string
+  project?: string
+  repo?: string
+}
+
+const PLATFORMS: Record<Platform, PlatformConfig> = {
+  vercel: {
+    name: 'Vercel',
+    cli: 'vercel',
+    checkCommand: ['vercel', '--version'],
+    environments: ['production', 'preview', 'development'],
+    deployCommand: (envName, value, options) => {
+      const args = ['env', 'add', envName]
+      if (options.environment) {
+        args.push(options.environment)
+      }
+      if (options.project) {
+        args.push('--project', options.project)
+      }
+      return args
+    }
+  },
+  netlify: {
+    name: 'Netlify',
+    cli: 'netlify',
+    checkCommand: ['netlify', '--version'],
+    deployCommand: (envName, value, options) => {
+      const args = ['env:set', envName, value]
+      if (options.project) {
+        args.push('--site', options.project)
+      }
+      return args
+    }
+  },
+  cloudflare: {
+    name: 'Cloudflare Workers',
+    cli: 'wrangler',
+    checkCommand: ['wrangler', '--version'],
+    deployCommand: (envName, value, options) => {
+      const args = ['secret', 'put', envName]
+      if (options.project) {
+        args.push('--name', options.project)
+      }
+      return args
+    }
+  },
+  github: {
+    name: 'GitHub Actions',
+    cli: 'gh',
+    checkCommand: ['gh', '--version'],
+    deployCommand: (envName, value, options) => {
+      const args = ['secret', 'set', envName]
+      if (options.repo) {
+        args.push('--repo', options.repo)
+      }
+      return args
+    }
+  },
+  railway: {
+    name: 'Railway',
+    cli: 'railway',
+    checkCommand: ['railway', '--version'],
+    deployCommand: (envName, value, options) => {
+      return ['variables', 'set', `${envName}=${value}`]
+    }
+  },
+  fly: {
+    name: 'Fly.io',
+    cli: 'fly',
+    checkCommand: ['fly', 'version'],
+    deployCommand: (envName, value, options) => {
+      const args = ['secrets', 'set', `${envName}=${value}`]
+      if (options.project) {
+        args.push('--app', options.project)
+      }
+      return args
+    }
+  }
+}
+
 /**
  * Execute 1Password CLI command
  */
@@ -195,6 +287,124 @@ function addTokenToExisting(params: {
 }
 
 /**
+ * Check if a CLI tool is available
+ */
+function checkCliAvailable(cli: string, checkCommand: string[]): boolean {
+  try {
+    execFileSync(checkCommand[0], checkCommand.slice(1), {
+      encoding: 'utf8',
+      timeout: 5000,
+      stdio: ['pipe', 'pipe', 'pipe']
+    })
+    return true
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Deploy environment variables to a platform
+ */
+function deployEnvVars(params: {
+  platform: Platform
+  envVars: Array<{ name: string; itemId?: string; value?: string }>
+  environment?: string
+  project?: string
+  repo?: string
+  vault?: string
+}): {
+  platform: string
+  deployed: Array<{ name: string; success: boolean; error?: string }>
+  summary: string
+} {
+  const { platform, envVars, environment, project, repo, vault = DEFAULT_VAULT } = params
+
+  const platformConfig = PLATFORMS[platform]
+  if (!platformConfig) {
+    throw new Error(`Unsupported platform: ${platform}. Supported: ${Object.keys(PLATFORMS).join(', ')}`)
+  }
+
+  // Check CLI is available
+  if (!checkCliAvailable(platformConfig.cli, platformConfig.checkCommand)) {
+    throw new Error(`${platformConfig.cli} CLI not found. Install it first: https://vercel.com/docs/cli (or equivalent for ${platformConfig.name})`)
+  }
+
+  const deployed: Array<{ name: string; success: boolean; error?: string }> = []
+  const options: DeployOptions = { environment, project, repo }
+
+  for (const envVar of envVars) {
+    try {
+      // Get value from 1Password if itemId provided
+      let value = envVar.value
+      if (!value && envVar.itemId) {
+        const keyResult = getApiKey({ itemId: envVar.itemId, vault })
+        value = keyResult.value
+      }
+
+      if (!value) {
+        deployed.push({ name: envVar.name, success: false, error: 'No value provided or found' })
+        continue
+      }
+
+      const cmdArgs = platformConfig.deployCommand(envVar.name, value, options)
+
+      // Handle platforms that need value via stdin (Vercel, Cloudflare)
+      if (platform === 'vercel' || platform === 'cloudflare') {
+        execFileSync(cmdArgs[0], cmdArgs.slice(1), {
+          encoding: 'utf8',
+          timeout: 30000,
+          input: value,
+          stdio: ['pipe', 'pipe', 'pipe']
+        })
+      } else if (platform === 'github') {
+        // GitHub needs value via stdin with --body flag or env var
+        execFileSync(cmdArgs[0], [...cmdArgs.slice(1), '--body', value], {
+          encoding: 'utf8',
+          timeout: 30000,
+          stdio: ['pipe', 'pipe', 'pipe']
+        })
+      } else {
+        execFileSync(cmdArgs[0], cmdArgs.slice(1), {
+          encoding: 'utf8',
+          timeout: 30000,
+          stdio: ['pipe', 'pipe', 'pipe']
+        })
+      }
+
+      deployed.push({ name: envVar.name, success: true })
+    } catch (error: unknown) {
+      const execError = error as { stderr?: string; message?: string }
+      const errorMsg = execError.stderr?.trim() || execError.message || 'Unknown error'
+      deployed.push({ name: envVar.name, success: false, error: errorMsg })
+    }
+  }
+
+  const successCount = deployed.filter(d => d.success).length
+  const summary = `Deployed ${successCount}/${deployed.length} env vars to ${platformConfig.name}`
+
+  return { platform: platformConfig.name, deployed, summary }
+}
+
+/**
+ * List available platforms and their CLI status
+ */
+function listPlatforms(): Array<{
+  id: string
+  name: string
+  cli: string
+  available: boolean
+  environments?: string[]
+}> {
+  return Object.entries(PLATFORMS).map(([id, config]) => ({
+    id,
+    name: config.name,
+    cli: config.cli,
+    available: checkCliAvailable(config.cli, config.checkCommand),
+    environments: config.environments
+  }))
+}
+
+/**
  * Search for existing items
  */
 function searchItems(params: {
@@ -360,6 +570,67 @@ const tools: Tool[] = [
         }
       }
     }
+  },
+  {
+    name: 'deploy_env_vars',
+    description: 'Deploy environment variables from 1Password to a platform (Vercel, Netlify, Cloudflare Workers, GitHub Actions, Railway, Fly.io). Retrieves keys from 1Password and sets them via the platform CLI.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        platform: {
+          type: 'string',
+          enum: ['vercel', 'netlify', 'cloudflare', 'github', 'railway', 'fly'],
+          description: 'Target platform to deploy to'
+        },
+        envVars: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                description: 'Environment variable name (e.g., OPENAI_API_KEY)'
+              },
+              itemId: {
+                type: 'string',
+                description: '1Password item ID or title to get value from'
+              },
+              value: {
+                type: 'string',
+                description: 'Direct value (if not using 1Password)'
+              }
+            },
+            required: ['name']
+          },
+          description: 'List of environment variables to deploy. Each needs either itemId (to fetch from 1Password) or value (direct).'
+        },
+        environment: {
+          type: 'string',
+          description: 'Target environment (e.g., "production", "preview" for Vercel)'
+        },
+        project: {
+          type: 'string',
+          description: 'Project name/ID (for Vercel, Netlify, Cloudflare, Fly)'
+        },
+        repo: {
+          type: 'string',
+          description: 'Repository (for GitHub, e.g., "owner/repo")'
+        },
+        vault: {
+          type: 'string',
+          description: '1Password vault to read from'
+        }
+      },
+      required: ['platform', 'envVars']
+    }
+  },
+  {
+    name: 'list_platforms',
+    description: 'List supported deployment platforms and check which CLIs are installed.',
+    inputSchema: {
+      type: 'object',
+      properties: {}
+    }
   }
 ]
 
@@ -407,6 +678,14 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case 'search_items':
         result = searchItems(args as Parameters<typeof searchItems>[0])
+        break
+
+      case 'deploy_env_vars':
+        result = deployEnvVars(args as Parameters<typeof deployEnvVars>[0])
+        break
+
+      case 'list_platforms':
+        result = listPlatforms()
         break
 
       default:
