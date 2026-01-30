@@ -1,0 +1,1011 @@
+{
+  "content": [
+    {
+      "id": "main-footer",
+      "name": "section",
+      "parent": 0,
+      "children": [
+        "footer-container"
+      ],
+      "settings": {
+        "tag": "footer",
+        "_background": {
+          "color": {
+            "raw": "var(--base-dark)"
+          }
+        },
+        "_padding": {
+          "top": "var(--spacing-xxxl)",
+          "right": "var(--spacing-m)",
+          "bottom": "var(--spacing-xl)",
+          "left": "var(--spacing-m)"
+        },
+        "_textAlign": "center"
+      },
+      "label": "Main Footer Section (Dark)"
+    },
+    {
+      "id": "footer-container",
+      "name": "div",
+      "parent": "main-footer",
+      "children": [
+        "top-nav-bar",
+        "bernadette-smith-logo",
+        "tagline",
+        "social-icons-wrapper",
+        "support-campaign-button",
+        "bottom-footer-line"
+      ],
+      "settings": {
+        "_maxWidth": "1400px",
+        "_margin": {
+          "left": "auto",
+          "right": "auto"
+        }
+      },
+      "label": "Footer Container"
+    },
+    {
+      "id": "top-nav-bar",
+      "name": "div",
+      "parent": "footer-container",
+      "children": [
+        "nav-about",
+        "nav-divider-1",
+        "nav-issues",
+        "nav-divider-2",
+        "nav-news",
+        "nav-divider-3",
+        "nav-events",
+        "nav-divider-4",
+        "nav-volunteer",
+        "nav-divider-5",
+        "nav-contact"
+      ],
+      "settings": {
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_gap": "var(--spacing-m)",
+        "_flexWrap": "wrap",
+        "_margin": {
+          "bottom": "var(--spacing-xxl)"
+        }
+      },
+      "label": "Top Navigation Bar"
+    },
+    {
+      "id": "nav-about",
+      "name": "text-link",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "About",
+        "link": {
+          "type": "internal",
+          "url": "#about"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-200)"
+          },
+          "fontSize": "var(--text-m)",
+          "fontWeight": "400",
+          "textTransform": "uppercase",
+          "letterSpacing": "0.5px"
+        },
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Nav - About"
+    },
+    {
+      "id": "nav-divider-1",
+      "name": "text-basic",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "|",
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-600)"
+          },
+          "fontSize": "var(--text-m)"
+        }
+      },
+      "label": "Nav Divider"
+    },
+    {
+      "id": "nav-issues",
+      "name": "text-link",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "Issues",
+        "link": {
+          "type": "internal",
+          "url": "#issues"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-200)"
+          },
+          "fontSize": "var(--text-m)",
+          "fontWeight": "400",
+          "textTransform": "uppercase",
+          "letterSpacing": "0.5px"
+        },
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Nav - Issues"
+    },
+    {
+      "id": "nav-divider-2",
+      "name": "text-basic",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "|",
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-600)"
+          },
+          "fontSize": "var(--text-m)"
+        }
+      },
+      "label": "Nav Divider"
+    },
+    {
+      "id": "nav-news",
+      "name": "text-link",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "News",
+        "link": {
+          "type": "internal",
+          "url": "#news"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-200)"
+          },
+          "fontSize": "var(--text-m)",
+          "fontWeight": "400",
+          "textTransform": "uppercase",
+          "letterSpacing": "0.5px"
+        },
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Nav - News"
+    },
+    {
+      "id": "nav-divider-3",
+      "name": "text-basic",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "|",
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-600)"
+          },
+          "fontSize": "var(--text-m)"
+        }
+      },
+      "label": "Nav Divider"
+    },
+    {
+      "id": "nav-events",
+      "name": "text-link",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "Events",
+        "link": {
+          "type": "internal",
+          "url": "#events"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-200)"
+          },
+          "fontSize": "var(--text-m)",
+          "fontWeight": "400",
+          "textTransform": "uppercase",
+          "letterSpacing": "0.5px"
+        },
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Nav - Events"
+    },
+    {
+      "id": "nav-divider-4",
+      "name": "text-basic",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "|",
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-600)"
+          },
+          "fontSize": "var(--text-m)"
+        }
+      },
+      "label": "Nav Divider"
+    },
+    {
+      "id": "nav-volunteer",
+      "name": "text-link",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "Volunteer",
+        "link": {
+          "type": "internal",
+          "url": "#volunteer"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-200)"
+          },
+          "fontSize": "var(--text-m)",
+          "fontWeight": "400",
+          "textTransform": "uppercase",
+          "letterSpacing": "0.5px"
+        },
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Nav - Volunteer"
+    },
+    {
+      "id": "nav-divider-5",
+      "name": "text-basic",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "|",
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-600)"
+          },
+          "fontSize": "var(--text-m)"
+        }
+      },
+      "label": "Nav Divider"
+    },
+    {
+      "id": "nav-contact",
+      "name": "text-link",
+      "parent": "top-nav-bar",
+      "settings": {
+        "text": "Contact",
+        "link": {
+          "type": "internal",
+          "url": "#contact"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-200)"
+          },
+          "fontSize": "var(--text-m)",
+          "fontWeight": "400",
+          "textTransform": "uppercase",
+          "letterSpacing": "0.5px"
+        },
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Nav - Contact"
+    },
+    {
+      "id": "bernadette-smith-logo",
+      "name": "div",
+      "parent": "footer-container",
+      "children": ["logo-bernadette", "logo-smith"],
+      "settings": {
+        "_display": "flex",
+        "_gap": "var(--spacing-s)",
+        "_justifyContent": "center",
+        "_margin": {
+          "bottom": "var(--spacing-l)"
+        }
+      },
+      "label": "Bernadette Smith Logo Wrapper"
+    },
+    {
+      "id": "logo-bernadette",
+      "name": "text-basic",
+      "parent": "bernadette-smith-logo",
+      "settings": {
+        "text": "BERNADETTE",
+        "tag": "h2",
+        "_typography": {
+          "color": {
+            "raw": "var(--white)"
+          },
+          "fontSize": "var(--text-xxxxl)",
+          "fontWeight": "900",
+          "letterSpacing": "8px",
+          "lineHeight": "1"
+        }
+      },
+      "label": "Logo - Bernadette (White)"
+    },
+    {
+      "id": "logo-smith",
+      "name": "text-basic",
+      "parent": "bernadette-smith-logo",
+      "settings": {
+        "text": "SMITH",
+        "tag": "h2",
+        "_typography": {
+          "color": {
+            "raw": "var(--primary)"
+          },
+          "fontSize": "var(--text-xxxxl)",
+          "fontWeight": "900",
+          "letterSpacing": "8px",
+          "lineHeight": "1"
+        }
+      },
+      "label": "Logo - Smith (Red)"
+    },
+    {
+      "id": "tagline",
+      "name": "text-basic",
+      "parent": "footer-container",
+      "settings": {
+        "text": "Faith. Family. Freedom.",
+        "tag": "p",
+        "_typography": {
+          "color": {
+            "raw": "var(--accent)"
+          },
+          "fontSize": "var(--text-xl)",
+          "fontWeight": "500",
+          "fontStyle": "italic"
+        },
+        "_margin": {
+          "bottom": "var(--spacing-xxl)"
+        }
+      },
+      "label": "Campaign Tagline"
+    },
+    {
+      "id": "social-icons-wrapper",
+      "name": "div",
+      "parent": "footer-container",
+      "children": [
+        "social-facebook",
+        "social-x",
+        "social-instagram",
+        "social-youtube",
+        "social-truth"
+      ],
+      "settings": {
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_gap": "var(--spacing-l)",
+        "_margin": {
+          "bottom": "var(--spacing-xxl)"
+        },
+        "_flexWrap": "wrap"
+      },
+      "label": "Social Icons Wrapper"
+    },
+    {
+      "id": "social-facebook",
+      "name": "icon",
+      "parent": "social-icons-wrapper",
+      "settings": {
+        "icon": {
+          "library": "fontawesome",
+          "icon": "fab fa-facebook-f"
+        },
+        "link": {
+          "type": "external",
+          "url": "https://facebook.com"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-400)"
+          },
+          "fontSize": "var(--text-l)"
+        },
+        "_border": {
+          "style": "solid",
+          "width": {
+            "top": "2px",
+            "right": "2px",
+            "bottom": "2px",
+            "left": "2px"
+          },
+          "color": {
+            "raw": "var(--gray-600)"
+          },
+          "radius": {
+            "top": "50%",
+            "right": "50%",
+            "bottom": "50%",
+            "left": "50%"
+          }
+        },
+        "_padding": {
+          "top": "12px",
+          "right": "12px",
+          "bottom": "12px",
+          "left": "12px"
+        },
+        "_width": "48px",
+        "_height": "48px",
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--white)",
+              "border-color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Social - Facebook"
+    },
+    {
+      "id": "social-x",
+      "name": "icon",
+      "parent": "social-icons-wrapper",
+      "settings": {
+        "icon": {
+          "library": "fontawesome",
+          "icon": "fab fa-x-twitter"
+        },
+        "link": {
+          "type": "external",
+          "url": "https://twitter.com"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-400)"
+          },
+          "fontSize": "var(--text-l)"
+        },
+        "_border": {
+          "style": "solid",
+          "width": {
+            "top": "2px",
+            "right": "2px",
+            "bottom": "2px",
+            "left": "2px"
+          },
+          "color": {
+            "raw": "var(--gray-600)"
+          },
+          "radius": {
+            "top": "50%",
+            "right": "50%",
+            "bottom": "50%",
+            "left": "50%"
+          }
+        },
+        "_padding": {
+          "top": "12px",
+          "right": "12px",
+          "bottom": "12px",
+          "left": "12px"
+        },
+        "_width": "48px",
+        "_height": "48px",
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--white)",
+              "border-color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Social - X/Twitter"
+    },
+    {
+      "id": "social-instagram",
+      "name": "icon",
+      "parent": "social-icons-wrapper",
+      "settings": {
+        "icon": {
+          "library": "fontawesome",
+          "icon": "fab fa-instagram"
+        },
+        "link": {
+          "type": "external",
+          "url": "https://instagram.com"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-400)"
+          },
+          "fontSize": "var(--text-l)"
+        },
+        "_border": {
+          "style": "solid",
+          "width": {
+            "top": "2px",
+            "right": "2px",
+            "bottom": "2px",
+            "left": "2px"
+          },
+          "color": {
+            "raw": "var(--gray-600)"
+          },
+          "radius": {
+            "top": "50%",
+            "right": "50%",
+            "bottom": "50%",
+            "left": "50%"
+          }
+        },
+        "_padding": {
+          "top": "12px",
+          "right": "12px",
+          "bottom": "12px",
+          "left": "12px"
+        },
+        "_width": "48px",
+        "_height": "48px",
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--white)",
+              "border-color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Social - Instagram"
+    },
+    {
+      "id": "social-youtube",
+      "name": "icon",
+      "parent": "social-icons-wrapper",
+      "settings": {
+        "icon": {
+          "library": "fontawesome",
+          "icon": "fab fa-youtube"
+        },
+        "link": {
+          "type": "external",
+          "url": "https://youtube.com"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-400)"
+          },
+          "fontSize": "var(--text-l)"
+        },
+        "_border": {
+          "style": "solid",
+          "width": {
+            "top": "2px",
+            "right": "2px",
+            "bottom": "2px",
+            "left": "2px"
+          },
+          "color": {
+            "raw": "var(--gray-600)"
+          },
+          "radius": {
+            "top": "50%",
+            "right": "50%",
+            "bottom": "50%",
+            "left": "50%"
+          }
+        },
+        "_padding": {
+          "top": "12px",
+          "right": "12px",
+          "bottom": "12px",
+          "left": "12px"
+        },
+        "_width": "48px",
+        "_height": "48px",
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--white)",
+              "border-color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Social - YouTube"
+    },
+    {
+      "id": "social-truth",
+      "name": "icon",
+      "parent": "social-icons-wrapper",
+      "settings": {
+        "icon": {
+          "library": "fontawesome",
+          "icon": "fas fa-t"
+        },
+        "link": {
+          "type": "external",
+          "url": "https://truthsocial.com"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-400)"
+          },
+          "fontSize": "var(--text-l)"
+        },
+        "_border": {
+          "style": "solid",
+          "width": {
+            "top": "2px",
+            "right": "2px",
+            "bottom": "2px",
+            "left": "2px"
+          },
+          "color": {
+            "raw": "var(--gray-600)"
+          },
+          "radius": {
+            "top": "50%",
+            "right": "50%",
+            "bottom": "50%",
+            "left": "50%"
+          }
+        },
+        "_padding": {
+          "top": "12px",
+          "right": "12px",
+          "bottom": "12px",
+          "left": "12px"
+        },
+        "_width": "48px",
+        "_height": "48px",
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--white)",
+              "border-color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Social - Truth Social"
+    },
+    {
+      "id": "support-campaign-button",
+      "name": "button",
+      "parent": "footer-container",
+      "settings": {
+        "text": "SUPPORT THE CAMPAIGN",
+        "link": {
+          "type": "internal",
+          "url": "#donate"
+        },
+        "_background": {
+          "color": {
+            "raw": "var(--primary)"
+          }
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--white)"
+          },
+          "fontSize": "var(--text-l)",
+          "fontWeight": "700",
+          "letterSpacing": "1px"
+        },
+        "_padding": {
+          "top": "var(--spacing-m)",
+          "right": "var(--spacing-xxl)",
+          "bottom": "var(--spacing-m)",
+          "left": "var(--spacing-xxl)"
+        },
+        "_border": {
+          "radius": {
+            "top": "var(--radius-m)",
+            "right": "var(--radius-m)",
+            "bottom": "var(--radius-m)",
+            "left": "var(--radius-m)"
+          }
+        },
+        "_margin": {
+          "bottom": "var(--spacing-xxl)",
+          "left": "auto",
+          "right": "auto"
+        },
+        "_display": "inline-block",
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "background-color": "var(--primary-dark)",
+              "transform": "translateY(-2px)"
+            }
+          }
+        ]
+      },
+      "label": "Support Campaign Button"
+    },
+    {
+      "id": "bottom-footer-line",
+      "name": "div",
+      "parent": "footer-container",
+      "children": [
+        "copyright-2025",
+        "footer-divider-1",
+        "privacy-link",
+        "footer-divider-2",
+        "terms-link",
+        "footer-divider-3",
+        "disclaimer-link",
+        "footer-divider-4",
+        "website-credit"
+      ],
+      "settings": {
+        "_display": "flex",
+        "_justifyContent": "center",
+        "_alignItems": "center",
+        "_gap": "var(--spacing-s)",
+        "_flexWrap": "wrap",
+        "_padding": {
+          "top": "var(--spacing-l)"
+        },
+        "_borderTop": {
+          "style": "solid",
+          "width": "1px",
+          "color": {
+            "raw": "var(--gray-700)"
+          }
+        }
+      },
+      "label": "Bottom Footer Line"
+    },
+    {
+      "id": "copyright-2025",
+      "name": "text-basic",
+      "parent": "bottom-footer-line",
+      "settings": {
+        "text": "&copy; 2025 Bernadette Smith for U.S. Senate",
+        "tag": "span",
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-500)"
+          },
+          "fontSize": "var(--text-s)",
+          "fontWeight": "400"
+        }
+      },
+      "label": "Copyright 2025"
+    },
+    {
+      "id": "footer-divider-1",
+      "name": "text-basic",
+      "parent": "bottom-footer-line",
+      "settings": {
+        "text": "|",
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-700)"
+          },
+          "fontSize": "var(--text-s)"
+        }
+      },
+      "label": "Footer Divider"
+    },
+    {
+      "id": "privacy-link",
+      "name": "text-link",
+      "parent": "bottom-footer-line",
+      "settings": {
+        "text": "Privacy Policy",
+        "link": {
+          "type": "internal",
+          "url": "#privacy"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-500)"
+          },
+          "fontSize": "var(--text-s)",
+          "fontWeight": "400"
+        },
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Privacy Policy Link"
+    },
+    {
+      "id": "footer-divider-2",
+      "name": "text-basic",
+      "parent": "bottom-footer-line",
+      "settings": {
+        "text": "|",
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-700)"
+          },
+          "fontSize": "var(--text-s)"
+        }
+      },
+      "label": "Footer Divider"
+    },
+    {
+      "id": "terms-link",
+      "name": "text-link",
+      "parent": "bottom-footer-line",
+      "settings": {
+        "text": "Terms of Service",
+        "link": {
+          "type": "internal",
+          "url": "#terms"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-500)"
+          },
+          "fontSize": "var(--text-s)",
+          "fontWeight": "400"
+        },
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Terms of Service Link"
+    },
+    {
+      "id": "footer-divider-3",
+      "name": "text-basic",
+      "parent": "bottom-footer-line",
+      "settings": {
+        "text": "|",
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-700)"
+          },
+          "fontSize": "var(--text-s)"
+        }
+      },
+      "label": "Footer Divider"
+    },
+    {
+      "id": "disclaimer-link",
+      "name": "text-link",
+      "parent": "bottom-footer-line",
+      "settings": {
+        "text": "Disclaimer",
+        "link": {
+          "type": "internal",
+          "url": "#disclaimer"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-500)"
+          },
+          "fontSize": "var(--text-s)",
+          "fontWeight": "400"
+        },
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Disclaimer Link"
+    },
+    {
+      "id": "footer-divider-4",
+      "name": "text-basic",
+      "parent": "bottom-footer-line",
+      "settings": {
+        "text": "|",
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-700)"
+          },
+          "fontSize": "var(--text-s)"
+        }
+      },
+      "label": "Footer Divider"
+    },
+    {
+      "id": "website-credit",
+      "name": "text-link",
+      "parent": "bottom-footer-line",
+      "settings": {
+        "text": "Website by JBMD Creations",
+        "link": {
+          "type": "external",
+          "url": "https://jbmdcreations.com"
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--gray-500)"
+          },
+          "fontSize": "var(--text-s)",
+          "fontWeight": "400"
+        },
+        "_cssCustom": [
+          {
+            "selector": "&:hover",
+            "properties": {
+              "color": "var(--primary)"
+            }
+          }
+        ]
+      },
+      "label": "Website Credit"
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://smithformichigan.com",
+  "version": "2.1.4"
+}
